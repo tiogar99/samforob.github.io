@@ -262,9 +262,12 @@ strong { font-weight: 700; }
     repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 10px);
 }
 
-.tex-rules {
+.tex-dots {
   background-image:
-    repeating-linear-gradient(0deg, var(--ink) 0 1px, transparent 1px 7px);
+    radial-gradient(circle, var(--ink) 1px, transparent 1.2px),
+    radial-gradient(circle, var(--ink) 1px, transparent 1.2px);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
 }
 
 .tex-stripe {
@@ -687,17 +690,19 @@ textarea:focus-visible {
 .contact-details .link-highlight:hover { color: var(--bordeaux); }
 
 .contact-card {
-  background-color: var(--blue);
+  background-color: var(--cream);
+  color: var(--bordeaux);
   --shadow-color: var(--red);
   --shadow-x: 4px;
   --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
-  color: var(--white);
   border-radius: var(--card-radius);
   padding: clamp(1.75rem, 3.5vw, 2.5rem);
 }
 
-.contact-card h3 { color: var(--orange); }
+.contact-card h3 { color: var(--red); }
+
+.contact-card :is(input, textarea) { border-color: var(--bordeaux); }
 
 /* -------------------------------------------------------------------------
    15. FOOTER

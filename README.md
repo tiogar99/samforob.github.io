@@ -82,12 +82,15 @@ markup so no two adjacent panels share a pattern:
 | Platform | `.tex-graph` | graph grid |
 | Get Involved | `.tex-cross` | crosshatch |
 | Donate | `.tex-stripe` | vertical pinstripe |
-| Contact | `.tex-rules` | horizontal rules |
+| Contact | `.tex-dots` | staggered dot grid |
 | Footer | `.tex-hatch` | 45° hatch |
 
 All six sit at the same weight and scale so they read as one family rather than
 six unrelated treatments. Checkerboard and wide diagonal bands were tried and
-dropped — both read as a pattern rather than a texture.
+dropped — both read as a pattern rather than a texture. Horizontal rules were
+tried on Contact and dropped too: across a wide dark panel they read as CRT
+scanlines. Contact's dot grid is the one non-line texture on the page, so it
+cannot echo a neighbouring block.
 
 Gradient rulings are used rather than a film-grain image (`feTurbulence`):
 blending a grey noise layer over a fill lightens and desaturates it, and the
@@ -96,6 +99,23 @@ palette is fixed by the brand sheet. Rulings leave the hue untouched.
 Ink is `--ink`, white at 8.1%. The orange panel inverts it to bordeaux at
 6.75% — a white ruling is effectively invisible on the one genuinely light
 fill. Cards stay flat so they still read as a layer above their panel.
+
+## Cards sit light on dark
+
+Both cards-on-a-panel pairings use a light card on a dark fill, which is what
+gives them separation:
+
+| Panel | Card | Separation |
+| --- | --- | --- |
+| Get Involved — blue | cream | 11.9:1 |
+| Contact — dark blue | cream | 11.9:1 |
+| Platform — orange | blue | 3.3:1 |
+
+The Contact card was blue on dark blue at 1.9:1 and read muddy. Moving it to
+cream brought two knock-ons: the form fields are white, which is 1.29:1 against
+cream, so they take a bordeaux border to keep the field edge visible; and the
+submit button moved from orange to bordeaux, since orange on cream is 1.88:1
+and the button edge dissolved into the card.
 
 ## Hard shadow
 
