@@ -69,7 +69,7 @@
   /* Texture ink. Gradient rulings are used rather than a film-grain image:
      a grey noise layer blended over a fill lightens and desaturates it, and
      the palette is fixed by the brand sheet. Rulings leave the hue alone. */
-  --ink: rgba(255, 255, 255, 0.09);
+  --ink: rgba(255, 255, 255, 0.081);
 
   /* Hard shadow: a zero-blur solid offset, the same device the wordmark uses
      for its red edge. Measured off Icon.png, that offset runs down and to the
@@ -201,7 +201,7 @@ strong { font-weight: 700; }
 .panel--orange {
   background-color: var(--orange);
   color: var(--on-orange);
-  --ink: rgba(69, 0, 13, 0.075);
+  --ink: rgba(69, 0, 13, 0.0675);
 }
 .panel--red      { background-color: var(--red);      color: var(--on-red); }
 
@@ -696,17 +696,17 @@ textarea:focus-visible {
   margin: 0 var(--panel-inset) var(--panel-inset);
   padding: 2.25rem 0;
   border-radius: var(--panel-radius);
-  background-color: var(--bordeaux);
-  color: var(--white);
+  background-color: var(--blue);
+  color: var(--cream);
   font-size: 0.9rem;
-  --shadow-color: var(--red);
+  --shadow-color: var(--bordeaux);
   --shadow-x: 4px;
   --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
 }
 
-.site-footer a { color: var(--orange); }
-.disclaimer { font-size: 0.8rem; opacity: 0.75; margin-top: 0.5rem; }
+.site-footer a { color: var(--cream); }
+.disclaimer { font-size: 0.8rem; opacity: 0.88; margin-top: 0.5rem; }
 
 /* -------------------------------------------------------------------------
    16. RESPONSIVE

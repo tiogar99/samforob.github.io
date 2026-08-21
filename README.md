@@ -52,7 +52,14 @@ Buttons are pills (`--pill: 999px`) in a filled variant (`.btn-orange`,
 takes its colour from the panel via `currentColor`).
 
 Current order: blue hero → bordeaux about → orange platform → blue get-involved
-→ red donate band → bordeaux contact → bordeaux footer.
+→ red donate band → bordeaux contact → **blue** footer.
+
+The footer is blue rather than bordeaux so it does not run into the Contact
+panel above it. Blue is also the only other brand fill that carries footer text
+at 14.4px: orange needs bordeaux ink and would echo the Platform panel, and red
+fails every pairing at this size (its best is white at 4.21). Footer links are
+cream, not orange — orange measures 3.34 on blue, fine for a heading but short
+of the 4.5 this size requires — so the underline carries the affordance.
 
 The masthead sits inside the hero panel rather than in a separate bar, and the
 orange-on-blue wordmark matches `logo-solid.png`, which is why the hero is blue.
@@ -86,9 +93,9 @@ Gradient rulings are used rather than a film-grain image (`feTurbulence`):
 blending a grey noise layer over a fill lightens and desaturates it, and the
 palette is fixed by the brand sheet. Rulings leave the hue untouched.
 
-Ink is `--ink`, white at 9%. The orange panel inverts it to bordeaux at 7.5% —
-a white ruling is effectively invisible on the one genuinely light fill. Cards
-stay flat so they still read as a layer above their panel.
+Ink is `--ink`, white at 8.1%. The orange panel inverts it to bordeaux at
+6.75% — a white ruling is effectively invisible on the one genuinely light
+fill. Cards stay flat so they still read as a layer above their panel.
 
 ## Hard shadow
 
