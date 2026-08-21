@@ -4,205 +4,248 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sam Holland for Mayor | An Oak Bay for Everyone</title>
-  
-  <!-- Custom Stylesheet -->
+  <meta name="description" content="Sam Holland for Oak Bay Mayor — local leadership on climate, healthcare, affordability, and infrastructure.">
+  <meta name="theme-color" content="#1A3FC7">
+
+  <link rel="icon" href="Icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="Icon.png">
+
+  <meta property="og:title" content="Sam Holland for Mayor | An Oak Bay for Everyone">
+  <meta property="og:description" content="Local leadership on climate, healthcare, affordability, and infrastructure.">
+  <meta property="og:image" content="Solid%20Logo.png">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=Signika:wght@300..700&amp;display=swap">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ==========================================================================
-     1. HEADER & NAVIGATION BAR
-     ========================================================================== -->
-  <header class="site-header">
-    <div class="header-container">
-      <a href="index.html" class="logo">
-        Sam Holland <span class="logo-sub">for Oak Bay Mayor</span>
-      </a>
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-      <nav class="main-nav">
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#record">Record</a></li>
-          <li><a href="#platform">Platform</a></li>
-          <li><a href="#get-involved">Get Involved</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-actions">
-        <a href="#get-involved" class="btn btn-light btn-sm">Volunteer</a>
-        <a href="#donate" class="btn btn-primary btn-sm">Donate</a>
-      </div>
-    </div>
-  </header>
+  <main id="main">
 
   <!-- ==========================================================================
-     2. HERO SECTION (Branding, Photo, & Slogan)
+     HERO — blue panel. Carries the masthead, per the reference layout.
      ========================================================================== -->
-  <section id="hero" class="hero-section">
-    <div class="container hero-grid">
-      
-      <!-- Text / Slogan Column -->
-      <div class="hero-content">
-        <span class="badge text-tertiary">Oak Bay Mayor</span>
-        <h1>Leadership that works for you.</h1>
-        <p class="hero-lead">
-          Local leadership on climate, healthcare, affordability, and infrastructure.
-        </p>
-        <div class="hero-buttons">
-          <a href="#platform" class="btn btn-primary">The Platform</a>
-          <a href="#get-involved" class="btn btn-dark">Get Involved</a>
-        </div>
-      </div>
-
-      <!-- Candidate Photo Column -->
-      <div class="hero-image-wrapper">
-        <img src="images/candidate-hero.jpg" alt="Jane Doe candidate portrait" class="hero-image">
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-     3. TRACK RECORD & ABOUT SECTION
-     ========================================================================== -->
-  <section id="record" class="section-light">
+  <section id="hero" class="panel panel--blue panel--hero">
     <div class="container">
-      
-      <div class="grid-2-col">
-        <!-- Candidate Action Photo -->
-        <div class="record-image-wrapper">
-          <img src="images/candidate-community.jpg" alt="Sam Holland in the community" class="record-image">
-        </div>
 
-        <!-- Track Record Text -->
-        <div class="record-content">
-          <p>
-            Democracy is about choice; leadership is about results. I'm running for Mayor because I think Oak Bay needs both. I believe Oak Bay deserves better access to healthcare, excellent transit, affordable housing, and safe cycling and walking in Oak Bay. 
-          </p>
-          <p>
-            My focus as a community organizer and professional has always been about bringing people together to tackle complex problems—tackling bike theft, building housing affordability, and getting better transit for our city, to name a few of the problems I've helped organize around. I'm overjoyed to have been part of projects like creating our region's first professional bike valet program and tackling low vacancty rates by legalizing thousands of new homes across the Capital Region.
-          </p>
-        </div>
+      <div class="masthead">
+        <a href="index.html" class="logo">
+          <img src="Transparent%20Logo.png" alt="Sam Holland for Oak Bay Mayor"
+               class="logo-mark" width="720" height="480">
+        </a>
+
+        <nav class="main-nav" aria-label="Main">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#platform">Platform</a></li>
+            <li><a href="#get-involved">Get Involved</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <a href="#donate" class="btn btn-outline btn-sm">Donate</a>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-     4. GET INVOLVED SECTION (Lawn Signs, Volunteering, Donations)
-     ========================================================================== -->
-  <section id="get-involved" class="section-dark">
-    <div class="container text-center">
-      <h2>Get Involved</h2>
-      <p class="section-intro">
-        Elections are won at the doorstep and on the street. Help us knock doors, host a lawn sign, or chip in to fund the campaign— every bit helps.
-      </p>
-
-      <div class="action-cards-grid">
-        
-        <!-- Action Card 1: Lawn Sign -->
-        <div class="action-card">
-        <a href="#contact" class="btn btn-light btn-sm">Request a Sign</a>
-          <p>Show your support for the campaign. We will deliver and install a lawn sign right to your yard.</p>
-        </div>
-
-        <!-- Action Card 2: Volunteer -->
-        <div class="action-card">
-          <a href="#contact" class="btn btn-primary btn-sm">Sign Up to Volunteer</a>
-          <p>Help us drop flyers, place phone calls, or greet voters at upcoming community town halls.</p>
-        </div>
-
-        <!-- Action Card 3: Donate -->
-        <div id="donate" class="action-card">
-          <a href="https://www.actblue.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Donate Online</a>
-          <p>Your contribution directly funds outreach materials, lawn signs, and newspaper notices.</p>
-          
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-     5. CAMPAIGN PLATFORM / FUTURE FOCUS
-     ========================================================================== -->
-  <section id="platform" class="section-light">
-    <div class="container">
-      <div class="text-center margin-bottom-lg">
-        <span class="badge text-secondary">Looking Ahead</span>
-        <h2>Key Platform Priorities</h2>
-        <p class="section-intro">Four core focuses for our town's next four years.</p>
-      </div>
-
-      <div class="platform-grid">
-        
-        <!-- Priority 1 -->
-        <div class="platform-card">
-          <div class="platform-icon">01</div>
-          <h3>Smart Growth & Housing Choice</h3>
-          <p>
-            Encourage responsible development that preserves municipal character while adding housing options for young families, seniors, and local workers.
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">Oak Bay Mayor</span>
+          <h1>Leadership that works for you.</h1>
+          <p class="hero-lead">
+            Local leadership on climate, healthcare, affordability, and infrastructure.
           </p>
-        </div>
-
-        <!-- Priority 2 -->
-        <div class="platform-card">
-          <div class="platform-icon">02</div>
-          <h3>Core Infrastructure First</h3>
-          <p>
-            Prioritize reliable water systems, road paving, sidewalk maintenance, and stormwater management over non-essential legacy projects.
-          </p>
-        </div>
-
-        <!-- Priority 3 -->
-        <div class="platform-card">
-          <div class="platform-icon">03</div>
-          <h3>Public Safety & Community Care</h3>
-          <p>
-            Work closely with local emergency services and regional health partners to address root causes of public safety issues and maintain vibrant public spaces.
-          </p>
-        </div>
-
-        <!-- Priority 4 -->
-        <div class="platform-card">
-          <div class="platform-icon">04</div>
-          <h3>Fiscal Discipline & Transparency</h3>
-          <p>
-            Keep property tax hikes reasonable by streamlining municipal operations and holding public town halls before major budget decisions.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-     6. CONTACT & NEWSLETTER SIGNUP
-     ========================================================================== -->
-  <section id="contact" class="section-dark">
-    <div class="container">
-      <div class="grid-2-col">
-        
-        <!-- Direct Contact Details -->
-        <div>
-          <h2>Get in Touch</h2>
-          <p>Have a question about the platform or want to discuss a local issue? Reach out to Jane directly.</p>
-          
-          <div class="contact-details">
-            <p><strong>Email:</strong> <a href="mailto:info@janedoeformayor.com" class="text-secondary">info@janedoeformayor.com</a></p>
-            <p><strong>Campaign Headquarters:</strong> 123 Main Street, Town Center</p>
+          <div class="hero-buttons">
+            <a href="#platform" class="btn btn-orange">The Platform</a>
+            <a href="#get-involved" class="btn btn-outline">Get Involved</a>
           </div>
         </div>
 
-        <!-- Sign-up / Contact Form -->
-        <div class="contact-form-wrapper">
+        <div class="hero-image-wrapper">
+          <img src="images/candidate-hero.svg" alt="Sam Holland candidate portrait"
+               class="hero-image" width="800" height="900" decoding="async">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     ABOUT — bordeaux panel. Longest read on the page; bordeaux is the only
+     brand colour that carries white, cream and orange text at AA.
+     ========================================================================== -->
+  <section id="about" class="panel panel--bordeaux">
+    <div class="container">
+      <div class="grid-2-col grid-2-col--stretch">
+
+        <div class="record-image-wrapper">
+          <img src="images/candidate-community.svg" alt="Sam Holland talking with residents at a community event"
+               class="record-image" width="900" height="700" loading="lazy" decoding="async">
+        </div>
+
+        <div class="record-content">
+          <span class="eyebrow">About Sam</span>
+          <!-- TODO(sam): heading wording is mine — the upstream copy arrived
+               with no heading, and a section without one breaks the outline. -->
+          <h2>Why I'm Running</h2>
+          <p>
+            Democracy is about choice; leadership is about results. I'm running for Mayor because I think Oak Bay needs both. I believe Oak Bay deserves better access to healthcare, excellent transit, affordable housing, and safe cycling and walking in Oak Bay.
+          </p>
+          <p>
+            My focus as a community organizer and professional has always been about bringing people together to tackle complex problems&mdash;tackling bike theft, building housing affordability, and getting better transit for our city, to name a few of the problems I've helped organize around. I'm overjoyed to have been part of projects like creating our region's first professional bike valet program and tackling low vacancy rates by legalizing thousands of new homes across the Capital Region.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     PLATFORM — orange panel with blue cards nested inside it. Orange carries
+     bordeaux text only, so all panel-level copy here is bordeaux.
+
+     TODO(sam): the four headings below are your own four themes, taken from the
+     hero line. The body copy is a PLACEHOLDER — the template's generic policy
+     text was making specific commitments in your name, so it has been removed
+     rather than left attributed to you. Replace before this goes live.
+     ========================================================================== -->
+  <section id="platform" class="panel panel--orange">
+    <div class="container">
+      <div class="panel-head text-center">
+        <span class="eyebrow">Looking Ahead</span>
+        <h2>Key Platform Priorities</h2>
+        <p class="section-intro">Four core focuses for Oak Bay's next four years.</p>
+      </div>
+
+      <div class="platform-grid">
+
+        <div class="platform-card">
+          <div class="platform-icon" aria-hidden="true">01</div>
+          <h3>Climate</h3>
+          <p class="placeholder-note">Platform text to come.</p>
+        </div>
+
+        <div class="platform-card">
+          <div class="platform-icon" aria-hidden="true">02</div>
+          <h3>Healthcare</h3>
+          <p class="placeholder-note">Platform text to come.</p>
+        </div>
+
+        <div class="platform-card">
+          <div class="platform-icon" aria-hidden="true">03</div>
+          <h3>Affordability</h3>
+          <p class="placeholder-note">Platform text to come.</p>
+        </div>
+
+        <div class="platform-card">
+          <div class="platform-icon" aria-hidden="true">04</div>
+          <h3>Infrastructure</h3>
+          <p class="placeholder-note">Platform text to come.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     GET INVOLVED — blue panel with cream cards nested inside it.
+     ========================================================================== -->
+  <section id="get-involved" class="panel panel--blue">
+    <div class="container">
+      <div class="panel-head text-center">
+        <span class="eyebrow">Join Us</span>
+        <h2>Get Involved</h2>
+        <p class="section-intro">
+          Elections are won at the doorstep and on the street. Help us knock doors, host a lawn sign, or chip in to fund the campaign &mdash; every bit helps.
+        </p>
+      </div>
+
+      <div class="action-grid">
+
+        <div class="action-card">
+          <h3>Request a Lawn Sign</h3>
+          <p>Show your support for the campaign. We will deliver and install a lawn sign right to your yard.</p>
+          <a href="#contact" class="btn btn-bordeaux btn-sm">Request a Sign</a>
+        </div>
+
+        <div class="action-card">
+          <h3>Join the Team</h3>
+          <p>Help us drop flyers, place phone calls, or greet voters at upcoming community town halls.</p>
+          <a href="#contact" class="btn btn-bordeaux btn-sm">Sign Up to Volunteer</a>
+        </div>
+
+        <div class="action-card">
+          <h3>Chip In Today</h3>
+          <p>Your contribution directly funds outreach materials, lawn signs, and newspaper notices.</p>
+          <!-- TODO(sam): point at the real donation page. -->
+          <a href="https://www.actblue.com" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+            Donate Online <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     DONATE — red band. Red only clears contrast for large bold type, so this
+     panel deliberately holds a headline and a button and no body copy.
+     ========================================================================== -->
+  <section id="donate" class="panel panel--red panel--donate">
+    <div class="container">
+      <div class="donate-row">
+        <div>
+          <h2>Chip in to the campaign</h2>
+          <p>Every contribution goes straight to reaching voters.</p>
+        </div>
+        <a href="https://www.actblue.com" target="_blank" rel="noopener" class="btn btn-cream">
+          Donate Now <span class="visually-hidden">(opens in a new tab)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     CONTACT — bordeaux panel with a blue form card nested inside it.
+     ========================================================================== -->
+  <section id="contact" class="panel panel--bordeaux">
+    <div class="container">
+      <div class="grid-2-col">
+
+        <div>
+          <span class="eyebrow">Contact</span>
+          <h2>Get in Touch</h2>
+          <p>Have a question about the platform or want to discuss a local issue? Reach out to Sam directly.</p>
+
+          <!-- TODO(sam): real campaign email and address. The values below are
+               placeholders carried over from the template. -->
+          <div class="contact-details">
+            <p><strong>Email:</strong> <span class="placeholder-note">campaign email to come</span></p>
+            <p><strong>Campaign Headquarters:</strong> <span class="placeholder-note">address to come</span></p>
+          </div>
+        </div>
+
+        <div class="contact-card">
           <h3>Sign Up for Updates</h3>
+          <!-- TODO(sam): replace `your-form-id` with the real Formspree endpoint.
+               Until then this form does not deliver. -->
           <form action="https://formspree.io/f/your-form-id" method="POST">
-            <input type="text" name="name" placeholder="Your Full Name" required>
-            <input type="email" name="email" placeholder="Your Email Address" required>
-            <textarea name="message" rows="3" placeholder="How would you like to get involved? (Optional)"></textarea>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Join the Campaign</button>
+            <div class="form-field">
+              <label for="contact-name">Your full name</label>
+              <input type="text" id="contact-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="contact-email">Your email address</label>
+              <input type="email" id="contact-email" name="email" autocomplete="email" required>
+            </div>
+            <div class="form-field">
+              <label for="contact-message">How would you like to get involved? <span>(optional)</span></label>
+              <textarea id="contact-message" name="message" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-orange btn-block">Join the Campaign</button>
           </form>
         </div>
 
@@ -210,13 +253,12 @@
     </div>
   </section>
 
-  <!-- ==========================================================================
-     7. LEGAL FOOTER
-     ========================================================================== -->
+  </main>
+
   <footer class="site-footer">
     <div class="container text-center">
-      <p>&copy; 2026 Jane Doe for Mayor. All rights reserved.</p>
-      <p class="disclaimer">Authorized by the Financial Agent for the Jane Doe Campaign.</p>
+      <p>&copy; 2026 Sam Holland for Oak Bay Mayor. All rights reserved.</p>
+      <p class="disclaimer">Authorized by the Financial Agent for the Sam Holland Campaign.</p>
     </div>
   </footer>
 

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" role="img" aria-label="Placeholder for community photo">
+  <rect width="900" height="700" fill="#EEE0D3"/>
+  <g fill="#1A3FC7" opacity="0.18">
+    <circle cx="250" cy="230" r="78"/><path d="M118 560c0-73 59-132 132-132s132 59 132 132z"/>
+    <circle cx="470" cy="200" r="64"/><path d="M360 560c0-61 49-110 110-110s110 49 110 110z"/>
+    <circle cx="670" cy="245" r="70"/><path d="M551 560c0-66 53-119 119-119s119 53 119 119z"/>
+  </g>
+  <!-- Centre-band label: survives the 16/9 crop applied below 900px. -->
+  <g fill="#45000D" opacity="0.6" font-family="system-ui, sans-serif" text-anchor="middle">
+    <text x="450" y="420" font-size="38" font-weight="700" letter-spacing="2">PLACEHOLDER IMAGE</text>
+    <text x="450" y="466" font-size="26">Replace with community photo</text>
+  </g>
+</svg>
