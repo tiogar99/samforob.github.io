@@ -14,9 +14,11 @@ No build step, no JavaScript.
 
 | Asset | Use |
 | --- | --- |
-| `assets/logo-transparent.png` | Wordmark in the masthead. |
-| `assets/logo-solid.png` | Wordmark on blue; Open Graph share image. |
+| `assets/logo-wordmark.svg` | Wordmark, masthead and hero. Vector. |
+| `assets/og-image.png` | Open Graph share card, 1200x630. |
 | `assets/icon.png` | Favicon and apple-touch-icon. |
+| `assets/logo-transparent.png` | Original raster wordmark. Source only, unreferenced. |
+| `assets/logo-solid.png` | Original wordmark on blue. Source only, unreferenced. |
 | `assets/candidate-hero.svg` | Hero portrait. Placeholder. |
 | `assets/candidate-community.svg` | Community photo. Placeholder. |
 
@@ -69,6 +71,25 @@ left column beside the portrait, with the tagline demoted beneath it. The `h1`
 *is* the wordmark image — the page's main heading is the candidate's name — so
 the smaller masthead copy is marked `alt=""` with an `aria-label` on its link,
 to avoid announcing the same name twice.
+
+## The wordmark is vector
+
+`logo-wordmark.svg` is an autotrace of `logo-transparent.png`, so the page no
+longer scales a 720px raster up to hero size. It is 23.6 KB against the PNG's
+33.1 KB, and resolution-independent.
+
+The trace is two paths: the union of all ink filled red, then the orange layer
+on top. That reproduces the offset red edge exactly, because the red is a
+shadow sitting behind the orange rather than a separate shape.
+
+To regenerate after a logo change, trace at scale 1 — upscaling first produces
+denser paths (55-113 KB) with no visible gain — and note that potracer traces
+the *false* region of a mask, so the ink mask must be inverted before tracing.
+
+**The OG image must stay raster.** Facebook, LinkedIn and X do not render SVG
+share images, so `og-image.png` is rendered from the SVG at 1200x630, the
+recommended OG size. `og:image` is an absolute URL because most scrapers will
+not resolve a relative one.
 
 ## Panel texture
 
