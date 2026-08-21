@@ -10,13 +10,21 @@ No build step, no JavaScript.
 | --- | --- |
 | `index.html` | The whole page. |
 | `style.css` | All styling. Numbered sections; tokens in `:root`. |
-| `images/` | Candidate photography. Currently SVG placeholders. |
-| `Transparent Logo.png` | Wordmark used in the masthead. |
-| `Solid Logo.png` | Wordmark on blue; used as the Open Graph share image. |
-| `Icon.png` | Favicon and apple-touch-icon. |
+| `assets/` | All media. |
 
-Note the two logo filenames contain spaces, so they are referenced as `%20` in
-`index.html`.
+| Asset | Use |
+| --- | --- |
+| `assets/logo-transparent.png` | Wordmark in the masthead. |
+| `assets/logo-solid.png` | Wordmark on blue; Open Graph share image. |
+| `assets/icon.png` | Favicon and apple-touch-icon. |
+| `assets/candidate-hero.svg` | Hero portrait. Placeholder. |
+| `assets/candidate-community.svg` | Community photo. Placeholder. |
+
+The three logo files were uploaded to the repo root with spaces in their names
+(`Solid Logo.png`), which forced `%20` in every reference. They are now in
+`assets/` under lowercase kebab-case names. Re-uploading through the GitHub web
+UI will drop new copies at the root rather than replacing these — move and
+rename them, or update the paths in `index.html`.
 
 ## Local preview
 
@@ -65,10 +73,22 @@ The colour is per-surface, because a shadow has to be visible against whatever
 it falls on. Bordeaux is the default; **bordeaux surfaces switch to red**, since
 a bordeaux shadow on a bordeaux panel is invisible.
 
-Cards grow their shadow on hover and translate back by the same delta, so they
-appear to rise rather than to stretch. Full-width panels take the static shadow
-but no hover — a hover target spanning the whole viewport fires whenever the
-cursor crosses that band, which reads as flicker rather than feedback.
+Offsets run in three tiers, so a nested card reads as sitting above its panel:
+
+| Tier | Rest | Hover | Travel |
+| --- | --- | --- | --- |
+| Panels, footer | 4px | — | — |
+| Cards | 8px | 11px | 3px |
+| Buttons (`.btn-shadow`) | 4px | 6px | 2px |
+
+Cards and buttons grow their shadow on hover and translate back by the same
+delta, so they appear to rise rather than to stretch; buttons also press flat on
+`:active`. Full-width panels take the static shadow but no hover — a hover
+target spanning the whole viewport fires whenever the cursor crosses that band,
+which reads as flicker rather than feedback.
+
+Because cards sit *inside* panels, they would inherit the panel's halved offset;
+they restate `--shadow-x`/`--shadow-y` to avoid that.
 
 Note that `--shadow-x`/`--shadow-y` are consumed as **longhand at each use
 site**, not pre-composed into a single `--hard-shadow` token. A custom property
@@ -85,6 +105,10 @@ to `0 100%`, `2px` tall at rest so it reads as an underline, animated to
 The text colour must flip at the same time. White text on a filled orange
 highlight is 2.4:1 and effectively disappears, so `:hover` also sets
 `--hl-text` (bordeaux on orange, 6.8:1).
+
+Resting thickness is `--hl-size`, `2px` by default. The `.hl-display` variant
+used on the hero headline switches it to `0.085em` so the rule scales with the
+type — a flat 2px line under a 3.4rem headline reads as a hairline.
 
 ## Colour: the palette is not interchangeable
 
@@ -134,8 +158,8 @@ Everything below is marked `TODO(sam)` in `index.html`.
   `https://formspree.io/f/your-form-id`.
 - **Campaign email and headquarters address** are placeholders.
 - **Both "Donate" links** point at `actblue.com` root, not a campaign page.
-- **Candidate photography** — replace `images/candidate-hero.svg` and
-  `images/candidate-community.svg`, then update `src`, `width`, and `height`.
+- **Candidate photography** — replace `assets/candidate-hero.svg` and
+  `assets/candidate-community.svg`, then update `src`, `width`, and `height`.
   Both use `object-fit: cover`, so keep the subject near the centre.
 - The "Why I'm Running" heading is editorial, not Sam's — the upstream copy had
   no heading, and a section without one breaks the document outline.

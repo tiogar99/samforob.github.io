@@ -56,8 +56,9 @@
 
   /* Panel geometry, measured off the reference build. */
   --panel-radius: 15px;
-  --panel-inset: 15px;
-  --panel-gap: 15px;
+  --panel-inset: clamp(14px, 1.8vw, 26px);
+  --panel-gap: clamp(14px, 1.8vw, 26px);
+  --card-gap: 15px;
   --panel-pad-y: clamp(2.75rem, 6vw, 4.75rem);
   --card-radius: 15px;
   --media-radius: 10px;
@@ -70,8 +71,8 @@
      RIGHT at ~2% of the mark's size. Flip the sign of both to move it left. */
   --shadow-x: 8px;
   --shadow-y: 8px;
-  --shadow-x-hover: 14px;
-  --shadow-y-hover: 14px;
+  --shadow-x-hover: 11px;
+  --shadow-y-hover: 11px;
   --shadow-color: var(--bordeaux);
 }
 
@@ -138,7 +139,9 @@ img { display: block; max-width: 100%; height: auto; }
   html { scroll-behavior: auto; }
   .platform-card:hover,
   .action-card:hover,
-  .contact-card:hover { transform: none; }
+  .contact-card:hover,
+  .btn-shadow:hover,
+  .btn-shadow:active { transform: none; }
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
@@ -180,6 +183,8 @@ strong { font-weight: 700; }
   padding: var(--panel-pad-y) 0;
   border-radius: var(--panel-radius);
   overflow: hidden;
+  --shadow-x: 4px;
+  --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
 }
 
@@ -258,10 +263,11 @@ strong { font-weight: 700; }
 .link-highlight {
   --hl: var(--orange);
   --hl-text: var(--bordeaux);
+  --hl-size: 2px;
   background-image: linear-gradient(var(--hl), var(--hl));
   background-repeat: no-repeat;
   background-position: 0 100%;
-  background-size: 100% 2px;
+  background-size: 100% var(--hl-size);
   padding: 0 0.18em 0.05em;
   text-decoration: none;
   transition: background-size 0.2s ease, color 0.2s ease;
@@ -270,6 +276,15 @@ strong { font-weight: 700; }
 .link-highlight:hover {
   background-size: 100% 100%;
   color: var(--hl-text);
+}
+
+/* Display-size variant: thickness tracks the font so the resting rule stays
+   proportional to the type it sits under. */
+.hl-display {
+  --hl-size: 0.085em;
+  padding: 0 0.06em 0.02em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 /* --------------------------------------------------------------------------
@@ -293,6 +308,29 @@ strong { font-weight: 700; }
 }
 
 .btn-sm { font-size: 0.72rem; padding: 0.65rem 1.4rem; }
+
+/* Hard shadow on a button. Offsets are smaller than a card's because the
+   element is smaller; the pop is 2px. */
+.btn-shadow {
+  --shadow-x: 4px;
+  --shadow-y: 4px;
+  --shadow-x-hover: 6px;
+  --shadow-y-hover: 6px;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+              box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.btn-shadow:hover {
+  box-shadow: var(--shadow-x-hover) var(--shadow-y-hover) 0 var(--shadow-color);
+  transform: translate(calc(var(--shadow-x) - var(--shadow-x-hover)),
+                       calc(var(--shadow-y) - var(--shadow-y-hover)));
+}
+
+.btn-shadow:active {
+  box-shadow: none;
+  transform: translate(var(--shadow-x), var(--shadow-y));
+}
 .btn-block { width: 100%; }
 
 /* Solid orange: the primary call to action on blue and bordeaux panels. */
@@ -448,6 +486,8 @@ textarea:focus-visible {
 .platform-card,
 .action-card,
 .contact-card {
+  --shadow-x: 8px;
+  --shadow-y: 8px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
@@ -466,7 +506,7 @@ textarea:focus-visible {
 .platform-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--panel-gap);
+  gap: var(--card-gap);
 }
 
 .platform-card {
@@ -492,7 +532,7 @@ textarea:focus-visible {
 .action-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: var(--panel-gap);
+  gap: var(--card-gap);
   text-align: left;
 }
 
@@ -570,6 +610,8 @@ textarea:focus-visible {
   color: var(--white);
   font-size: 0.9rem;
   --shadow-color: var(--red);
+  --shadow-x: 4px;
+  --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
 }
 
@@ -602,6 +644,4 @@ textarea:focus-visible {
   .hero-buttons .btn { flex: 1 1 12rem; }
 }
 
-@media (max-width: 420px) {
-  :root { --panel-inset: 10px; --panel-gap: 10px; }
-}
+
