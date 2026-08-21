@@ -29,7 +29,8 @@
    Palette is fixed by the brand sheet. Do not introduce new hues.
    -------------------------------------------------------------------------- */
 :root {
-  --blue:     #1A3FC7;  /* Persian Blue    */
+  --blue:      #1A3FC7;  /* Persian Blue    */
+  --blue-dark: #0C1D60;  /* Persian Blue, darkened — panel fill only */
   --red:      #F7002D;  /* Strawberry Red  */
   --orange:   #FF8513;  /* Princeton Orange*/
   --cream:    #EEE0D3;  /* Almond Cream    */
@@ -44,6 +45,7 @@
        on --cream     -> bordeaux (12.9) or blue (6.3)
      Use the --on-* tokens below rather than picking a hue by eye. */
   --on-blue:      var(--white);
+  --on-blue-dark: var(--white);
   --on-blue-soft: var(--cream);
   --on-bordeaux:  var(--white);
   --on-orange:    var(--bordeaux);
@@ -65,6 +67,11 @@
   --pill: 999px;
 
   --max-width: 1180px;
+
+  /* Texture ink. Gradient rulings are used rather than a film-grain image:
+     a grey noise layer blended over a fill lightens and desaturates it, and
+     the palette is fixed by the brand sheet. Rulings leave the hue alone. */
+  --ink: rgba(255, 255, 255, 0.081);
 
   /* Hard shadow: a zero-blur solid offset, the same device the wordmark uses
      for its red edge. Measured off Icon.png, that offset runs down and to the
@@ -193,8 +200,18 @@ strong { font-weight: 700; }
   color: var(--on-bordeaux);
   --shadow-color: var(--red);
 }
-.panel--orange   { background-color: var(--orange);   color: var(--on-orange); }
+.panel--orange {
+  background-color: var(--orange);
+  color: var(--on-orange);
+  --ink: rgba(69, 0, 13, 0.0675);
+}
 .panel--red      { background-color: var(--red);      color: var(--on-red); }
+
+.panel--navy {
+  background-color: var(--blue-dark);
+  color: var(--on-blue-dark);
+  --shadow-color: var(--red);
+}
 
 /* The hero carries the masthead, so it opens tighter at the top. */
 .panel--hero { padding-top: 0; }
@@ -211,12 +228,51 @@ strong { font-weight: 700; }
 .panel--blue     :is(h1, h2, h3, h4, h5, h6) { color: var(--orange); }
 .panel--orange   :is(h1, h2, h3, h4, h5, h6) { color: var(--bordeaux); }
 .panel--red      :is(h1, h2, h3, h4, h5, h6) { color: var(--bordeaux); }
+.panel--navy     :is(h1, h2, h3, h4, h5, h6) { color: var(--red); }
 
 .container {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Texture rulings. One per block so no two adjacent panels share a pattern.
+   All are deliberately the same weight and scale so they read as one family
+   rather than as six different treatments. */
+.tex-rings {
+  background-image:
+    repeating-radial-gradient(circle at 0 0, transparent 0 13px, var(--ink) 13px 14px);
+}
+
+.tex-hatch {
+  background-image:
+    repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 8px);
+}
+
+.tex-cross {
+  background-image:
+    repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 9px);
+}
+
+.tex-graph {
+  background-image:
+    repeating-linear-gradient(0deg, var(--ink) 0 1px, transparent 1px 10px),
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 10px);
+}
+
+.tex-dots {
+  background-image:
+    radial-gradient(circle, var(--ink) 1px, transparent 1.2px),
+    radial-gradient(circle, var(--ink) 1px, transparent 1.2px);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
+}
+
+.tex-stripe {
+  background-image:
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 7px);
 }
 
 /* --------------------------------------------------------------------------
@@ -236,6 +292,7 @@ strong { font-weight: 700; }
 /* Eyebrow picks up the panel's accent rather than a fixed hue. */
 .panel--blue     .eyebrow { color: var(--cream); }
 .panel--bordeaux .eyebrow { color: var(--orange); }
+.panel--navy     .eyebrow { color: var(--orange); }
 .panel--orange   .eyebrow { color: var(--bordeaux); opacity: 0.75; }
 
 .section-intro {
@@ -476,14 +533,25 @@ textarea:focus-visible {
   height: auto;
 }
 
+/* Orange is the only non-white colour that clears contrast on blue (3.34), and
+   only as large text — hence the 1.55rem (~25px) floor, which keeps it over the
+   24px threshold even at 390px wide. */
 .hero-tagline {
   font-family: var(--font-heading);
-  font-size: clamp(1.3rem, 1.05rem + 1.1vw, 1.85rem);
+  font-size: clamp(1.55rem, 1.2rem + 1.4vw, 1.95rem);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--cream);
+  color: var(--orange);
   margin-bottom: 1rem;
   text-wrap: balance;
+}
+
+/* The highlight cannot also be orange here: at rest the band overlaps the
+   bottom of the glyphs, so orange-on-orange would merge into a blob. Cream
+   reads against both the blue panel and the orange type. */
+.hero-tagline .link-highlight {
+  --hl: var(--cream);
+  --hl-text: var(--bordeaux);
 }
 
 .hero-lead {
@@ -622,17 +690,19 @@ textarea:focus-visible {
 .contact-details .link-highlight:hover { color: var(--bordeaux); }
 
 .contact-card {
-  background-color: var(--blue);
+  background-color: var(--cream);
+  color: var(--bordeaux);
   --shadow-color: var(--red);
   --shadow-x: 4px;
   --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
-  color: var(--white);
   border-radius: var(--card-radius);
   padding: clamp(1.75rem, 3.5vw, 2.5rem);
 }
 
-.contact-card h3 { color: var(--orange); }
+.contact-card h3 { color: var(--red); }
+
+.contact-card :is(input, textarea) { border-color: var(--bordeaux); }
 
 /* -------------------------------------------------------------------------
    15. FOOTER
@@ -641,17 +711,17 @@ textarea:focus-visible {
   margin: 0 var(--panel-inset) var(--panel-inset);
   padding: 2.25rem 0;
   border-radius: var(--panel-radius);
-  background-color: var(--bordeaux);
-  color: var(--white);
+  background-color: var(--blue);
+  color: var(--cream);
   font-size: 0.9rem;
-  --shadow-color: var(--red);
+  --shadow-color: var(--bordeaux);
   --shadow-x: 4px;
   --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
 }
 
-.site-footer a { color: var(--orange); }
-.disclaimer { font-size: 0.8rem; opacity: 0.75; margin-top: 0.5rem; }
+.site-footer a { color: var(--cream); }
+.disclaimer { font-size: 0.8rem; opacity: 0.88; margin-top: 0.5rem; }
 
 /* -------------------------------------------------------------------------
    16. RESPONSIVE

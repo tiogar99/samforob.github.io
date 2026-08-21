@@ -52,7 +52,14 @@ Buttons are pills (`--pill: 999px`) in a filled variant (`.btn-orange`,
 takes its colour from the panel via `currentColor`).
 
 Current order: blue hero → bordeaux about → orange platform → blue get-involved
-→ red donate band → bordeaux contact → bordeaux footer.
+→ red donate band → **dark blue** contact → blue footer.
+
+The footer is blue rather than bordeaux so it does not run into the Contact
+panel above it. Blue is also the only other brand fill that carries footer text
+at 14.4px: orange needs bordeaux ink and would echo the Platform panel, and red
+fails every pairing at this size (its best is white at 4.21). Footer links are
+cream, not orange — orange measures 3.34 on blue, fine for a heading but short
+of the 4.5 this size requires — so the underline carries the affordance.
 
 The masthead sits inside the hero panel rather than in a separate bar, and the
 orange-on-blue wordmark matches `logo-solid.png`, which is why the hero is blue.
@@ -62,6 +69,53 @@ left column beside the portrait, with the tagline demoted beneath it. The `h1`
 *is* the wordmark image — the page's main heading is the candidate's name — so
 the smaller masthead copy is marked `alt=""` with an `aria-label` on its link,
 to avoid announcing the same name twice.
+
+## Panel texture
+
+Each block carries its own print ruling, applied as a `tex-*` class in the
+markup so no two adjacent panels share a pattern:
+
+| Block | Class | Pattern |
+| --- | --- | --- |
+| Hero | `.tex-rings` | concentric rings from the top-left |
+| About | `.tex-hatch` | 45° hatch |
+| Platform | `.tex-graph` | graph grid |
+| Get Involved | `.tex-cross` | crosshatch |
+| Donate | `.tex-stripe` | vertical pinstripe |
+| Contact | `.tex-dots` | staggered dot grid |
+| Footer | `.tex-hatch` | 45° hatch |
+
+All six sit at the same weight and scale so they read as one family rather than
+six unrelated treatments. Checkerboard and wide diagonal bands were tried and
+dropped — both read as a pattern rather than a texture. Horizontal rules were
+tried on Contact and dropped too: across a wide dark panel they read as CRT
+scanlines. Contact's dot grid is the one non-line texture on the page, so it
+cannot echo a neighbouring block.
+
+Gradient rulings are used rather than a film-grain image (`feTurbulence`):
+blending a grey noise layer over a fill lightens and desaturates it, and the
+palette is fixed by the brand sheet. Rulings leave the hue untouched.
+
+Ink is `--ink`, white at 8.1%. The orange panel inverts it to bordeaux at
+6.75% — a white ruling is effectively invisible on the one genuinely light
+fill. Cards stay flat so they still read as a layer above their panel.
+
+## Cards sit light on dark
+
+Both cards-on-a-panel pairings use a light card on a dark fill, which is what
+gives them separation:
+
+| Panel | Card | Separation |
+| --- | --- | --- |
+| Get Involved — blue | cream | 11.9:1 |
+| Contact — dark blue | cream | 11.9:1 |
+| Platform — orange | blue | 3.3:1 |
+
+The Contact card was blue on dark blue at 1.9:1 and read muddy. Moving it to
+cream brought two knock-ons: the form fields are white, which is 1.29:1 against
+cream, so they take a bordeaux border to keep the field edge visible; and the
+submit button moved from orange to bordeaux, since orange on cream is 1.88:1
+and the button edge dissolved into the card.
 
 ## Hard shadow
 
@@ -129,6 +183,12 @@ ordinary underline. Past roughly 44% it starts eating the letterforms.
 wherever it clears contrast and the nearest non-white brand hue where it does
 not:
 
+The hero tagline is a `<p>`, not an `<h*>`, but it reads as a heading and
+follows the same rule — orange on blue. That forces a `1.55rem` floor on it too
+(orange only clears 3:1, so it must stay large text at every width), and forces
+its highlight to cream: an orange band under orange type would merge into the
+glyphs it overlaps.
+
 | Heading sits on | Colour | Ratio |
 | --- | --- | --- |
 | Bordeaux panel | **red** | 3.97 |
@@ -136,6 +196,7 @@ not:
 | Blue panel or blue card | orange | 3.34 |
 | Orange panel | bordeaux | 6.84 |
 | Red panel | bordeaux | 3.97 |
+| Dark blue panel | **red** | 3.67 |
 
 Red is not usable on blue (1.94) or orange (1.73) — both fall under even the
 3:1 large-text floor, and red on blue visibly vibrates. That three-way split is
@@ -152,6 +213,11 @@ the 18.66px-bold threshold and must clear 24px instead. Dropping `h3` back below
 Per the brand sheet: Persian Blue `#1A3FC7`, Strawberry Red `#F7002D`, Princeton
 Orange `#FF8513`, Almond Cream `#EEE0D3`, Night Bordeaux `#45000D`. Headers in
 Dela Gothic One, body in Signika.
+
+One value is not on the sheet: `--blue-dark: #0C1D60`, used as the Contact panel
+fill. It is a darkened Persian Blue rather than a new hue. It sits 1.9:1 from
+`--blue`, which is what lets the signup card and the footer stay legible as
+separate blocks against it.
 
 Measured contrast against each panel colour — **check this table before putting
 text on a panel**, and prefer the `--on-*` tokens over picking a hue by eye:
@@ -193,8 +259,9 @@ Everything below is marked `TODO(sam)` in `index.html`.
   it made specific commitments in a real candidate's name.
 - **The contact form does not deliver.** `action` is still the placeholder
   `https://formspree.io/f/your-form-id`.
-- **Campaign email and headquarters address** are placeholders.
-- **Both "Donate" links** point at `actblue.com` root, not a campaign page.
+- **The two "Donate" links point at the literal string `PLACEHOLDER`**, so they
+  resolve to a 404 relative path. The site now has a CNAME (`samuelholland.ca`),
+  so these are dead links on a live domain — they need the real donation URL.
 - **Candidate photography** — replace `assets/candidate-hero.svg` and
   `assets/candidate-community.svg`, then update `src`, `width`, and `height`.
   Both use `object-fit: cover`, so keep the subject near the centre.
