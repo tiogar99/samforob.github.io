@@ -65,18 +65,30 @@ to avoid announcing the same name twice.
 
 ## Panel texture
 
-Panels and the footer carry a fine halftone dot screen — a `radial-gradient`
-tiled at `--texture-grid` (7px). It echoes the offset-print look of the
-wordmark's misregistered red edge.
+Each block carries its own print ruling, applied as a `tex-*` class in the
+markup so no two adjacent panels share a pattern:
 
-A film-grain layer (`feTurbulence`) was tried first and rejected: a grey noise
-image blended over a fill lightens and desaturates it, and the palette is fixed
-by the brand sheet. The dot screen leaves the base hue untouched.
+| Block | Class | Pattern |
+| --- | --- | --- |
+| Hero | `.tex-rings` | concentric rings from the top-left |
+| About | `.tex-hatch` | 45° hatch |
+| Platform | `.tex-graph` | graph grid |
+| Get Involved | `.tex-cross` | crosshatch |
+| Donate | `.tex-stripe` | vertical pinstripe |
+| Contact | `.tex-rules` | horizontal rules |
+| Footer | `.tex-hatch` | 45° hatch |
 
-Dot colour is white at 10% on the dark panels. The orange panel inverts to
-bordeaux at 7% — a white screen is effectively invisible on the one genuinely
-light fill. Cards stay flat, so they still read as a separate layer above the
-panel.
+All six sit at the same weight and scale so they read as one family rather than
+six unrelated treatments. Checkerboard and wide diagonal bands were tried and
+dropped — both read as a pattern rather than a texture.
+
+Gradient rulings are used rather than a film-grain image (`feTurbulence`):
+blending a grey noise layer over a fill lightens and desaturates it, and the
+palette is fixed by the brand sheet. Rulings leave the hue untouched.
+
+Ink is `--ink`, white at 9%. The orange panel inverts it to bordeaux at 7.5% —
+a white ruling is effectively invisible on the one genuinely light fill. Cards
+stay flat so they still read as a layer above their panel.
 
 ## Hard shadow
 
@@ -143,6 +155,12 @@ ordinary underline. Past roughly 44% it starts eating the letterforms.
 **No heading anywhere is white.** Colour is assigned per surface, using red
 wherever it clears contrast and the nearest non-white brand hue where it does
 not:
+
+The hero tagline is a `<p>`, not an `<h*>`, but it reads as a heading and
+follows the same rule — orange on blue. That forces a `1.55rem` floor on it too
+(orange only clears 3:1, so it must stay large text at every width), and forces
+its highlight to cream: an orange band under orange type would merge into the
+glyphs it overlaps.
 
 | Heading sits on | Colour | Ratio |
 | --- | --- | --- |
