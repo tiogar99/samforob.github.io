@@ -139,7 +139,6 @@ img { display: block; max-width: 100%; height: auto; }
   html { scroll-behavior: auto; }
   .platform-card:hover,
   .action-card:hover,
-  .contact-card:hover,
   .btn-shadow:hover,
   .btn-shadow:active { transform: none; }
   *, *::before, *::after {
@@ -486,8 +485,7 @@ textarea:focus-visible {
 /* Cards lift on hover: the shadow grows and the block steps back against it by
    the same amount, so the card appears to rise rather than to stretch. */
 .platform-card,
-.action-card,
-.contact-card {
+.action-card {
   --shadow-x: 8px;
   --shadow-y: 8px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
@@ -495,8 +493,7 @@ textarea:focus-visible {
 }
 
 .platform-card:hover,
-.action-card:hover,
-.contact-card:hover {
+.action-card:hover {
   box-shadow: var(--shadow-x-hover) var(--shadow-y-hover) 0 var(--shadow-color);
   transform: translate(calc(var(--shadow-x) - var(--shadow-x-hover)),
                        calc(var(--shadow-y) - var(--shadow-y-hover)));
@@ -596,8 +593,7 @@ textarea:focus-visible {
   --shadow-color: var(--red);
   --shadow-x: 4px;
   --shadow-y: 4px;
-  --shadow-x-hover: 6px;
-  --shadow-y-hover: 6px;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
   color: var(--white);
   border-radius: var(--card-radius);
   padding: clamp(1.75rem, 3.5vw, 2.5rem);

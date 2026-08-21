@@ -79,12 +79,14 @@ Offsets run in three tiers, so a nested card reads as sitting above its panel:
 | --- | --- | --- | --- |
 | Panels, footer | 4px | — | — |
 | Cards | 8px | 11px | 3px |
-| Contact card | 4px | 6px | 2px |
+| Contact card | 4px | — | — |
 | Buttons (`.btn-shadow`) | 4px | 6px | 2px |
 
 Cards and buttons grow their shadow on hover and translate back by the same
 delta, so they appear to rise rather than to stretch; buttons also press flat on
-`:active`. Full-width panels take the static shadow but no hover — a hover
+`:active`. The contact card is the exception — it wraps a form rather than
+acting as a target, so it stays static and nothing shifts under the cursor
+while someone is filling the fields. Full-width panels take the static shadow but no hover — a hover
 target spanning the whole viewport fires whenever the cursor crosses that band,
 which reads as flicker rather than feedback.
 
