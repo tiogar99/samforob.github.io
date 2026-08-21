@@ -494,7 +494,7 @@ textarea:focus-visible {
 
 .logo-mark {
   width: auto;
-  height: clamp(1.6rem, 2.2vw, 2.1rem);
+  height: clamp(1.35rem, 1.8vw, 1.75rem);
 }
 
 .main-nav ul {
