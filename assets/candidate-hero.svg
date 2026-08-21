@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" role="img" aria-label="Placeholder for candidate portrait">
+  <rect width="800" height="900" fill="#EEE0D3"/>
+  <circle cx="400" cy="270" r="130" fill="#1A3FC7" opacity="0.18"/>
+  <path d="M150 900c0-138 112-250 250-250s250 112 250 250z" fill="#1A3FC7" opacity="0.18"/>
+  <!-- Label sits in the vertically centred band so it survives the 16/9
+       object-fit crop the stylesheet applies below 900px. -->
+  <g fill="#45000D" opacity="0.6" font-family="system-ui, sans-serif" text-anchor="middle">
+    <text x="400" y="530" font-size="36" font-weight="700" letter-spacing="2">PLACEHOLDER IMAGE</text>
+    <text x="400" y="578" font-size="25">Replace with candidate portrait</text>
+  </g>
+</svg>
