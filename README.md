@@ -233,8 +233,9 @@ Everything below is marked `TODO(sam)` in `index.html`.
   it made specific commitments in a real candidate's name.
 - **The contact form does not deliver.** `action` is still the placeholder
   `https://formspree.io/f/your-form-id`.
-- **Campaign email and headquarters address** are placeholders.
-- **Both "Donate" links** point at `actblue.com` root, not a campaign page.
+- **The two "Donate" links point at the literal string `PLACEHOLDER`**, so they
+  resolve to a 404 relative path. The site now has a CNAME (`samuelholland.ca`),
+  so these are dead links on a live domain — they need the real donation URL.
 - **Candidate photography** — replace `assets/candidate-hero.svg` and
   `assets/candidate-community.svg`, then update `src`, `width`, and `height`.
   Both use `object-fit: cover`, so keep the subject near the centre.
