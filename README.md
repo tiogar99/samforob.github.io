@@ -49,6 +49,43 @@ Current order: blue hero → bordeaux about → orange platform → blue get-inv
 The masthead sits inside the hero panel rather than in a separate bar, and the
 orange-on-blue wordmark matches `Solid Logo.png`, which is why the hero is blue.
 
+## Hard shadow
+
+Every panel and card carries a **hard shadow** — a `box-shadow` with zero blur
+in a solid colour, the same device the wordmark uses for its red edge. Measured
+off `Icon.png`, that offset runs **down and to the right** at ~2% of the mark's
+size, so the site matches that direction. To move it to the left instead, flip
+the sign on both offsets:
+
+```css
+--shadow-x: -8px;  --shadow-x-hover: -14px;
+```
+
+The colour is per-surface, because a shadow has to be visible against whatever
+it falls on. Bordeaux is the default; **bordeaux surfaces switch to red**, since
+a bordeaux shadow on a bordeaux panel is invisible.
+
+Cards grow their shadow on hover and translate back by the same delta, so they
+appear to rise rather than to stretch. Full-width panels take the static shadow
+but no hover — a hover target spanning the whole viewport fires whenever the
+cursor crosses that band, which reads as flicker rather than feedback.
+
+Note that `--shadow-x`/`--shadow-y` are consumed as **longhand at each use
+site**, not pre-composed into a single `--hard-shadow` token. A custom property
+whose value contains `var()` is substituted where it is *declared*, then
+inherits already-resolved — so a composed token on `:root` would ignore every
+per-panel `--shadow-color` override.
+
+## Underline that grows into a highlight
+
+In-content and nav links use `.link-highlight`: one `linear-gradient` anchored
+to `0 100%`, `2px` tall at rest so it reads as an underline, animated to
+`100% 100%` on hover so it reads as a marker highlight.
+
+The text colour must flip at the same time. White text on a filled orange
+highlight is 2.4:1 and effectively disappears, so `:hover` also sets
+`--hl-text` (bordeaux on orange, 6.8:1).
+
 ## Colour: the palette is not interchangeable
 
 Per the brand sheet: Persian Blue `#1A3FC7`, Strawberry Red `#F7002D`, Princeton

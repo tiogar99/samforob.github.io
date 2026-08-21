@@ -64,6 +64,15 @@
   --pill: 999px;
 
   --max-width: 1180px;
+
+  /* Hard shadow: a zero-blur solid offset, the same device the wordmark uses
+     for its red edge. Measured off Icon.png, that offset runs down and to the
+     RIGHT at ~2% of the mark's size. Flip the sign of both to move it left. */
+  --shadow-x: 8px;
+  --shadow-y: 8px;
+  --shadow-x-hover: 14px;
+  --shadow-y-hover: 14px;
+  --shadow-color: var(--bordeaux);
 }
 
 /* --------------------------------------------------------------------------
@@ -80,6 +89,7 @@ body {
   color: var(--on-cream);
   background-color: var(--cream);
   padding-top: var(--panel-inset);
+  padding-bottom: var(--shadow-y);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -126,6 +136,9 @@ img { display: block; max-width: 100%; height: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .platform-card:hover,
+  .action-card:hover,
+  .contact-card:hover { transform: none; }
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
@@ -167,10 +180,15 @@ strong { font-weight: 700; }
   padding: var(--panel-pad-y) 0;
   border-radius: var(--panel-radius);
   overflow: hidden;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
 }
 
 .panel--blue     { background-color: var(--blue);     color: var(--on-blue); }
-.panel--bordeaux { background-color: var(--bordeaux); color: var(--on-bordeaux); }
+.panel--bordeaux {
+  background-color: var(--bordeaux);
+  color: var(--on-bordeaux);
+  --shadow-color: var(--red);
+}
 .panel--orange   { background-color: var(--orange);   color: var(--on-orange); }
 .panel--red      { background-color: var(--red);      color: var(--on-red); }
 
@@ -231,6 +249,27 @@ strong { font-weight: 700; }
   height: 100%;
   aspect-ratio: auto;
   min-height: 18rem;
+}
+
+/* Underline-to-highlight: one gradient anchored to the bottom of the line box,
+   2px tall at rest so it reads as an underline, animated to full height on
+   hover so it reads as a marker highlight. The text colour flips at the same
+   time — white on an orange highlight is 2.4:1 and would vanish. */
+.link-highlight {
+  --hl: var(--orange);
+  --hl-text: var(--bordeaux);
+  background-image: linear-gradient(var(--hl), var(--hl));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 2px;
+  padding: 0 0.18em 0.05em;
+  text-decoration: none;
+  transition: background-size 0.2s ease, color 0.2s ease;
+}
+
+.link-highlight:hover {
+  background-size: 100% 100%;
+  color: var(--hl-text);
 }
 
 /* --------------------------------------------------------------------------
@@ -359,15 +398,10 @@ textarea:focus-visible {
 
 .main-nav a {
   display: inline-block;
-  padding: 0.3rem 0;
   font-size: 0.95rem;
   font-weight: 600;
-  text-decoration: none;
   color: var(--white);
-  border-bottom: 2px solid transparent;
 }
-
-.main-nav a:hover { color: var(--orange); border-bottom-color: var(--orange); }
 
 /* --------------------------------------------------------------------------
    9. HERO
@@ -406,6 +440,24 @@ textarea:focus-visible {
 .placeholder-note {
   font-style: italic;
   opacity: 0.7;
+}
+
+
+/* Cards lift on hover: the shadow grows and the block steps back against it by
+   the same amount, so the card appears to rise rather than to stretch. */
+.platform-card,
+.action-card,
+.contact-card {
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.platform-card:hover,
+.action-card:hover,
+.contact-card:hover {
+  box-shadow: var(--shadow-x-hover) var(--shadow-y-hover) 0 var(--shadow-color);
+  transform: translate(calc(var(--shadow-x) - var(--shadow-x-hover)),
+                       calc(var(--shadow-y) - var(--shadow-y-hover)));
 }
 
 /* -------------------------------------------------------------------------
@@ -495,9 +547,11 @@ textarea:focus-visible {
 
 .contact-details p { margin-bottom: 0.6rem; }
 .contact-details a { color: var(--orange); }
+.contact-details .link-highlight:hover { color: var(--bordeaux); }
 
 .contact-card {
   background-color: var(--blue);
+  --shadow-color: var(--red);
   color: var(--white);
   border-radius: var(--card-radius);
   padding: clamp(1.75rem, 3.5vw, 2.5rem);
@@ -515,6 +569,8 @@ textarea:focus-visible {
   background-color: var(--bordeaux);
   color: var(--white);
   font-size: 0.9rem;
+  --shadow-color: var(--red);
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
 }
 
 .site-footer a { color: var(--orange); }
