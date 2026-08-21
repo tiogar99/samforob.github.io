@@ -173,3 +173,121 @@ input:focus, textarea:focus {
 .text-tertiary  { color: var(--tertiary-color); }
 .bg-primary     { background-color: var(--primary-color); }
 .bg-dark        { background-color: var(--bg-dark); color: var(--text-light); }
+/* ==========================================================================
+   PAGE SECTIONS & GRID LAYOUTS
+   ========================================================================== */
+
+.text-center { text-align: center; }
+.margin-bottom-lg { margin-bottom: 2.5rem; }
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.section-intro {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+}
+
+/* 2-Column Grid (Hero & Record Sections) */
+.grid-2-col, .hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Image Wrappers */
+.hero-image, .record-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  border: 4px solid var(--primary-color);
+}
+
+.hero-lead {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.record-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.record-list li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.record-list li::before {
+  content: "■";
+  color: var(--secondary-color);
+  position: absolute;
+  left: 0;
+}
+
+/* Action Cards Grid */
+.action-cards-grid, .platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.action-card {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.platform-card {
+  background-color: #FFFFFF;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  border-top: 5px solid var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.platform-icon {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+
+/* Footer Styling */
+.site-footer {
+  background-color: #1a0005;
+  color: var(--text-light);
+  padding: 2rem 0;
+  font-size: 0.9rem;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+/* Mobile Responsiveness for Grids */
+@media (max-width: 768px) {
+  .grid-2-col, .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
