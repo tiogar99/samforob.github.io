@@ -14,7 +14,8 @@ No build step, no JavaScript.
 
 | Asset | Use |
 | --- | --- |
-| `assets/logo-wordmark.svg` | Wordmark, masthead and hero. Vector. |
+| `assets/logo-wordmark.svg` | Stacked wordmark, hero. Vector. |
+| `assets/logo-wordmark-horizontal.svg` | Horizontal lockup, masthead. Vector. |
 | `assets/og-image.png` | Open Graph share card, 1200x630. |
 | `assets/icon.png` | Favicon and apple-touch-icon. |
 | `assets/logo-transparent.png` | Original raster wordmark. Source only, unreferenced. |
@@ -81,6 +82,18 @@ longer scales a 720px raster up to hero size. It is 23.6 KB against the PNG's
 The trace is two paths: the union of all ink filled red, then the orange layer
 on top. That reproduces the offset red edge exactly, because the red is a
 shadow sitting behind the orange rather than a separate shape.
+
+`logo-wordmark-horizontal.svg` is the same artwork re-laid-out as a one-line
+lockup for the masthead. It is built by tracing the three text bands of the
+source separately, scaling HOLLAND up to SAM's cap height, and setting them on
+one baseline with a word space of 0.38 cap heights.
+
+Two things make that safe rather than a distortion. Stroke weight per cap height
+is 22.0% on HOLLAND against 22.8% on SAM, so matching cap heights keeps the
+weights matched. And the red offset is drawn as a second copy of the paths
+translated in *output* units, not baked into each word — the source offsets
+differ per word (5px on SAM, 2px on HOLLAND, both about 3% of their height), so
+scaling one word would otherwise have given it a thicker shadow than the other.
 
 To regenerate after a logo change, trace at scale 1 — upscaling first produces
 denser paths (55-113 KB) with no visible gain — and note that potracer traces

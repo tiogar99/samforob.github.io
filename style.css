@@ -494,7 +494,7 @@ textarea:focus-visible {
 
 .logo-mark {
   width: auto;
-  height: clamp(2.5rem, 3.4vw, 3.25rem);
+  height: clamp(1.6rem, 2.2vw, 2.1rem);
 }
 
 .main-nav ul {
@@ -731,6 +731,7 @@ textarea:focus-visible {
 @media (max-width: 900px) {
   .masthead { justify-content: center; gap: 1rem 1.25rem; }
   .logo { flex-basis: 100%; text-align: center; }
+  .logo-mark { margin-inline: auto; }
   .main-nav ul { justify-content: center; }
 
   .grid-2-col,
