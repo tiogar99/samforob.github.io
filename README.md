@@ -52,7 +52,7 @@ Buttons are pills (`--pill: 999px`) in a filled variant (`.btn-orange`,
 takes its colour from the panel via `currentColor`).
 
 Current order: blue hero → bordeaux about → orange platform → blue get-involved
-→ red donate band → bordeaux contact → **blue** footer.
+→ red donate band → **dark blue** contact → blue footer.
 
 The footer is blue rather than bordeaux so it does not run into the Contact
 panel above it. Blue is also the only other brand fill that carries footer text
@@ -176,6 +176,7 @@ glyphs it overlaps.
 | Blue panel or blue card | orange | 3.34 |
 | Orange panel | bordeaux | 6.84 |
 | Red panel | bordeaux | 3.97 |
+| Dark blue panel | **red** | 3.67 |
 
 Red is not usable on blue (1.94) or orange (1.73) — both fall under even the
 3:1 large-text floor, and red on blue visibly vibrates. That three-way split is
@@ -192,6 +193,11 @@ the 18.66px-bold threshold and must clear 24px instead. Dropping `h3` back below
 Per the brand sheet: Persian Blue `#1A3FC7`, Strawberry Red `#F7002D`, Princeton
 Orange `#FF8513`, Almond Cream `#EEE0D3`, Night Bordeaux `#45000D`. Headers in
 Dela Gothic One, body in Signika.
+
+One value is not on the sheet: `--blue-dark: #0C1D60`, used as the Contact panel
+fill. It is a darkened Persian Blue rather than a new hue. It sits 1.9:1 from
+`--blue`, which is what lets the signup card and the footer stay legible as
+separate blocks against it.
 
 Measured contrast against each panel colour — **check this table before putting
 text on a panel**, and prefer the `--on-*` tokens over picking a hue by eye:
