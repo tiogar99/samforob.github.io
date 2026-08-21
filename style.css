@@ -66,6 +66,13 @@
 
   --max-width: 1180px;
 
+  /* Halftone dot texture. Chosen over film grain because a grey noise layer
+     lightens and desaturates the fill underneath, and the palette is fixed by
+     the brand sheet. A dot screen also echoes the offset-print look of the
+     wordmark's misregistered red edge. */
+  --texture-dot: rgba(255, 255, 255, 0.10);
+  --texture-grid: 7px;
+
   /* Hard shadow: a zero-blur solid offset, the same device the wordmark uses
      for its red edge. Measured off Icon.png, that offset runs down and to the
      RIGHT at ~2% of the mark's size. Flip the sign of both to move it left. */
@@ -185,6 +192,8 @@ strong { font-weight: 700; }
   --shadow-x: 4px;
   --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+  background-image: radial-gradient(circle, var(--texture-dot) 1px, transparent 1.2px);
+  background-size: var(--texture-grid) var(--texture-grid);
 }
 
 .panel--blue     { background-color: var(--blue);     color: var(--on-blue); }
@@ -193,7 +202,11 @@ strong { font-weight: 700; }
   color: var(--on-bordeaux);
   --shadow-color: var(--red);
 }
-.panel--orange   { background-color: var(--orange);   color: var(--on-orange); }
+.panel--orange {
+  background-color: var(--orange);
+  color: var(--on-orange);
+  --texture-dot: rgba(69, 0, 13, 0.07);
+}
 .panel--red      { background-color: var(--red);      color: var(--on-red); }
 
 /* The hero carries the masthead, so it opens tighter at the top. */
@@ -648,6 +661,8 @@ textarea:focus-visible {
   --shadow-x: 4px;
   --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+  background-image: radial-gradient(circle, var(--texture-dot) 1px, transparent 1.2px);
+  background-size: var(--texture-grid) var(--texture-grid);
 }
 
 .site-footer a { color: var(--orange); }

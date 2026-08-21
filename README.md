@@ -63,6 +63,21 @@ left column beside the portrait, with the tagline demoted beneath it. The `h1`
 the smaller masthead copy is marked `alt=""` with an `aria-label` on its link,
 to avoid announcing the same name twice.
 
+## Panel texture
+
+Panels and the footer carry a fine halftone dot screen — a `radial-gradient`
+tiled at `--texture-grid` (7px). It echoes the offset-print look of the
+wordmark's misregistered red edge.
+
+A film-grain layer (`feTurbulence`) was tried first and rejected: a grey noise
+image blended over a fill lightens and desaturates it, and the palette is fixed
+by the brand sheet. The dot screen leaves the base hue untouched.
+
+Dot colour is white at 10% on the dark panels. The orange panel inverts to
+bordeaux at 7% — a white screen is effectively invisible on the one genuinely
+light fill. Cards stay flat, so they still read as a separate layer above the
+panel.
+
 ## Hard shadow
 
 Every panel and card carries a **hard shadow** — a `box-shadow` with zero blur
