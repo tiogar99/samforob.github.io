@@ -11,12 +11,12 @@
   --primary-color: #1A3FC7;      /* Royal Blue */
   --secondary-color: #FF8513;    /* Orange */
   --tertiary-color: #F7002D;     /* Bright Red */
-  --bg-light: #EEE0D3;           /* Cream / Light Background & Button Base */
-  --bg-dark: #45000D;            /* Dark Maroon / Dark Background & Accent */
+  --bg-light: #FF8513;           /* Orange */
+  --bg-dark: #1A3FC7;            /* Royal Blue */
   
   /* Text Colors */
-  --text-dark: #1C1B1B;          /* Body text on light backgrounds */
-  --text-light: #FFFFFF;         /* Body/Header text on dark backgrounds */
+  --text-dark: #45000D;          /* Body text on light backgrounds */
+  --text-light: #EEE0D3;         /* Body/Header text on dark backgrounds */
 
   /* Typography */
   --font-heading: 'Dela Gothic One', display, sans-serif;
