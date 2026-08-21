@@ -55,7 +55,13 @@ Current order: blue hero → bordeaux about → orange platform → blue get-inv
 → red donate band → bordeaux contact → bordeaux footer.
 
 The masthead sits inside the hero panel rather than in a separate bar, and the
-orange-on-blue wordmark matches `Solid Logo.png`, which is why the hero is blue.
+orange-on-blue wordmark matches `logo-solid.png`, which is why the hero is blue.
+
+The hero itself follows the reference layout: the wordmark set large in the
+left column beside the portrait, with the tagline demoted beneath it. The `h1`
+*is* the wordmark image — the page's main heading is the candidate's name — so
+the smaller masthead copy is marked `alt=""` with an `aria-label` on its link,
+to avoid announcing the same name twice.
 
 ## Hard shadow
 
@@ -116,6 +122,30 @@ line box** (`38%`) rather than a fixed length. That is what makes the band ride
 up over the bottom of the glyphs like a marker stroke instead of sitting clear
 underneath them — the detail that separates the reference effect from an
 ordinary underline. Past roughly 44% it starts eating the letterforms.
+
+## Heading colour
+
+**No heading anywhere is white.** Colour is assigned per surface, using red
+wherever it clears contrast and the nearest non-white brand hue where it does
+not:
+
+| Heading sits on | Colour | Ratio |
+| --- | --- | --- |
+| Bordeaux panel | **red** | 3.97 |
+| Cream card | **red** | 3.25 |
+| Blue panel or blue card | orange | 3.34 |
+| Orange panel | bordeaux | 6.84 |
+| Red panel | bordeaux | 3.97 |
+
+Red is not usable on blue (1.94) or orange (1.73) — both fall under even the
+3:1 large-text floor, and red on blue visibly vibrates. That three-way split is
+a contrast constraint, not a preference.
+
+All of these clear 3:1 rather than 4.5:1, which is only valid because every
+heading qualifies as *large text*. `h3` is therefore set at a minimum of
+`1.55rem` (~25px): Dela Gothic One ships at weight 400 only, so it cannot reach
+the 18.66px-bold threshold and must clear 24px instead. Dropping `h3` back below
+24px would silently invalidate the orange and red card headings.
 
 ## Colour: the palette is not interchangeable
 
