@@ -278,11 +278,13 @@ strong { font-weight: 700; }
   color: var(--hl-text);
 }
 
-/* Display-size variant: thickness tracks the font so the resting rule stays
-   proportional to the type it sits under. */
+/* Display variant: the resting band is a percentage of the LINE BOX rather than
+   a fixed rule, so it rides up over the bottom of the glyphs the way a marker
+   stroke would, instead of sitting clear underneath them. This is the detail
+   that makes the reference version read as a highlighter rather than a link. */
 .hl-display {
-  --hl-size: 0.085em;
-  padding: 0 0.06em 0.02em;
+  --hl-size: 38%;
+  padding: 0 0.06em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
@@ -592,6 +594,10 @@ textarea:focus-visible {
 .contact-card {
   background-color: var(--blue);
   --shadow-color: var(--red);
+  --shadow-x: 4px;
+  --shadow-y: 4px;
+  --shadow-x-hover: 6px;
+  --shadow-y-hover: 6px;
   color: var(--white);
   border-radius: var(--card-radius);
   padding: clamp(1.75rem, 3.5vw, 2.5rem);

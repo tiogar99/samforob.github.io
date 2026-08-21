@@ -79,6 +79,7 @@ Offsets run in three tiers, so a nested card reads as sitting above its panel:
 | --- | --- | --- | --- |
 | Panels, footer | 4px | — | — |
 | Cards | 8px | 11px | 3px |
+| Contact card | 4px | 6px | 2px |
 | Buttons (`.btn-shadow`) | 4px | 6px | 2px |
 
 Cards and buttons grow their shadow on hover and translate back by the same
@@ -106,9 +107,13 @@ The text colour must flip at the same time. White text on a filled orange
 highlight is 2.4:1 and effectively disappears, so `:hover` also sets
 `--hl-text` (bordeaux on orange, 6.8:1).
 
-Resting thickness is `--hl-size`, `2px` by default. The `.hl-display` variant
-used on the hero headline switches it to `0.085em` so the rule scales with the
-type — a flat 2px line under a 3.4rem headline reads as a hairline.
+Resting thickness is `--hl-size`, `2px` by default for nav and prose links.
+
+The `.hl-display` variant on the hero headline sets it to a **percentage of the
+line box** (`38%`) rather than a fixed length. That is what makes the band ride
+up over the bottom of the glyphs like a marker stroke instead of sitting clear
+underneath them — the detail that separates the reference effect from an
+ordinary underline. Past roughly 44% it starts eating the letterforms.
 
 ## Colour: the palette is not interchangeable
 
