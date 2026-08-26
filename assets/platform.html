@@ -1,0 +1,308 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Platform — Placeholder</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=Signika:wght@300..700&amp;family=Simonetta&amp;family=Fugaz+One&amp;display=swap">
+
+  <!-- Site stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================================================================
+       HERO
+       ================================================================ -->
+
+  <header class="panel panel--orange platform-hero">
+    <div class="container">
+
+      <div class="platform-hero-grid">
+
+        <div class="platform-hero-copy">
+          <span class="eyebrow">Placeholder</span>
+
+          <h1>Our Platform</h1>
+
+          <p class="section-intro">
+            Placeholder text introducing the platform and explaining
+            what visitors can expect to find on this page.
+          </p>
+
+        </div>
+
+        <div class="platform-hero-image">
+          <img
+            src="https://placehold.co/900x700"
+            alt="Placeholder image">
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ================================================================
+       PLATFORM SECTIONS
+       ================================================================ -->
+
+  <main>
+
+    <section class="panel platform-details">
+      <div class="container">
+
+        <div class="panel-head text-center">
+          <span class="eyebrow">Placeholder</span>
+          <h2>Platform Priorities</h2>
+          <p class="section-intro">
+            Click each section to learn more.
+          </p>
+        </div>
+
+
+        <div class="platform-sections">
+
+          <!-- 01 -->
+          <details class="platform-section">
+            <summary>
+              <span class="platform-number">01</span>
+              <span class="platform-title">Climate</span>
+              <span class="platform-toggle" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="platform-content">
+              <p>
+                Placeholder text describing this platform priority.
+                This section can contain several paragraphs explaining
+                the issue, the candidate's position, and proposed actions.
+              </p>
+
+              <p>
+                Additional placeholder text can go here. This is where
+                the detailed platform information will eventually live.
+              </p>
+            </div>
+          </details>
+
+
+          <!-- 02 -->
+          <details class="platform-section">
+            <summary>
+              <span class="platform-number">02</span>
+              <span class="platform-title">Healthcare</span>
+              <span class="platform-toggle" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="platform-content">
+              <p>
+                Placeholder text describing this platform priority.
+                Detailed information will be added here.
+              </p>
+
+              <p>
+                Additional placeholder content.
+              </p>
+            </div>
+          </details>
+
+
+          <!-- 03 -->
+          <details class="platform-section">
+            <summary>
+              <span class="platform-number">03</span>
+              <span class="platform-title">Affordability</span>
+              <span class="platform-toggle" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="platform-content">
+              <p>
+                Placeholder text describing this platform priority.
+              </p>
+
+              <p>
+                Additional placeholder content.
+              </p>
+            </div>
+          </details>
+
+
+          <!-- 04 -->
+          <details class="platform-section">
+            <summary>
+              <span class="platform-number">04</span>
+              <span class="platform-title">Infrastructure</span>
+              <span class="platform-toggle" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="platform-content">
+              <p>
+                Placeholder text describing this platform priority.
+              </p>
+
+              <p>
+                Additional placeholder content.
+              </p>
+            </div>
+          </details>
+
+
+          <!-- 05 -->
+          <details class="platform-section">
+            <summary>
+              <span class="platform-number">05</span>
+              <span class="platform-title">Placeholder Priority</span>
+              <span class="platform-toggle" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="platform-content">
+              <p>
+                Placeholder text describing this platform priority.
+              </p>
+
+              <p>
+                Additional placeholder content.
+              </p>
+            </div>
+          </details>
+
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ================================================================
+       PLATFORM PAGE STYLES
+       ================================================================ -->
+
+  <style>
+
+    /* Hero ------------------------------------------------------------ */
+
+    .platform-hero {
+      padding: clamp(3rem, 7vw, 7rem) 0;
+    }
+
+    .platform-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    .platform-hero-copy h1 {
+      margin-bottom: 1.25rem;
+    }
+
+    .platform-hero-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--card-radius);
+    }
+
+
+    /* Platform accordion -------------------------------------------- */
+
+    .platform-details {
+      padding: clamp(3rem, 7vw, 6rem) 0;
+    }
+
+    .platform-sections {
+      margin-top: 3rem;
+    }
+
+    .platform-section {
+      border-top: 2px solid currentColor;
+    }
+
+    .platform-section:last-child {
+      border-bottom: 2px solid currentColor;
+    }
+
+    .platform-section summary {
+      display: grid;
+      grid-template-columns: 4rem 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .platform-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .platform-number {
+      font-family: var(--font-heading);
+      color: var(--orange);
+      font-size: 1.25rem;
+    }
+
+    .platform-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      text-transform: uppercase;
+    }
+
+    .platform-toggle {
+      font-size: 2rem;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .platform-section[open] .platform-toggle {
+      transform: rotate(45deg);
+    }
+
+    .platform-content {
+      max-width: 70ch;
+      padding: 0 0 2rem 5rem;
+    }
+
+    .platform-content p:last-child {
+      margin-bottom: 0;
+    }
+
+
+    /* Mobile --------------------------------------------------------- */
+
+    @media (max-width: 700px) {
+
+      .platform-hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .platform-hero-image {
+        order: -1;
+      }
+
+      .platform-section summary {
+        grid-template-columns: 2.5rem 1fr auto;
+      }
+
+      .platform-content {
+        padding-left: 3.5rem;
+      }
+
+    }
+
+  </style>
+
+</body>
+</html>
+```
