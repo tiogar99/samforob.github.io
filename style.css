@@ -52,9 +52,9 @@
   --on-red:       var(--white);
   --on-cream:     var(--bordeaux);
 
-  /* Typography — Dela Gothic One headers, Signika body, per the brand sheet. */
-  --font-heading: 'Dela Gothic One', Impact, 'Arial Black', sans-serif;
-  --font-body: 'Signika', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Typography — Dela Gothic One headers, Simonetta body, per the brand sheet. */
+  --font-heading: 'Fugaz One', 'Dela Gothic One', Impact, 'Arial Black', sans-serif;
+  --font-body: 'Simonetta', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Panel geometry, measured off the reference build. */
   --panel-radius: 15px;
@@ -68,10 +68,6 @@
 
   --max-width: 1180px;
 
-  /* Texture ink. Gradient rulings are used rather than a film-grain image:
-     a grey noise layer blended over a fill lightens and desaturates it, and
-     the palette is fixed by the brand sheet. Rulings leave the hue alone. */
-  --ink: rgba(255, 255, 255, 0.081);
 
   /* Hard shadow: a zero-blur solid offset, the same device the wordmark uses
      for its red edge. Measured off Icon.png, that offset runs down and to the
@@ -94,6 +90,7 @@ body {
   font-family: var(--font-body);
   font-size: 1.0625rem;
   line-height: 1.6;
+  font-weight: 500;
   color: var(--on-cream);
   background-color: var(--cream);
   padding-top: var(--panel-inset);
@@ -203,7 +200,7 @@ strong { font-weight: 700; }
 .panel--orange {
   background-color: var(--orange);
   color: var(--on-orange);
-  --ink: rgba(69, 0, 13, 0.0675);
+
 }
 .panel--red      { background-color: var(--red);      color: var(--on-red); }
 
@@ -224,7 +221,7 @@ strong { font-weight: 700; }
      on orange   -> bordeaux  6.84  (red is 1.73, unusable)
      on red      -> bordeaux  3.97
    The three-colour split is a contrast constraint, not a preference. */
-.panel--bordeaux :is(h1, h2, h3, h4, h5, h6) { color: var(--red); }
+.panel--bordeaux :is(h1, h2, h3, h4, h5, h6) { color: var(--cream); }
 .panel--blue     :is(h1, h2, h3, h4, h5, h6) { color: var(--orange); }
 .panel--orange   :is(h1, h2, h3, h4, h5, h6) { color: var(--bordeaux); }
 .panel--red      :is(h1, h2, h3, h4, h5, h6) { color: var(--bordeaux); }
@@ -541,7 +538,7 @@ textarea:focus-visible {
   font-size: clamp(1.55rem, 1.2rem + 1.4vw, 1.95rem);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--orange);
+  color: var(--cream);
   margin-bottom: 1rem;
   text-wrap: balance;
 }
@@ -550,7 +547,7 @@ textarea:focus-visible {
    bottom of the glyphs, so orange-on-orange would merge into a blob. Cream
    reads against both the blue panel and the orange type. */
 .hero-tagline .link-highlight {
-  --hl: var(--cream);
+  --hl: var(--orange);
   --hl-text: var(--bordeaux);
 }
 
@@ -624,6 +621,14 @@ textarea:focus-visible {
   line-height: 1;
   color: var(--orange);
   margin-bottom: 1rem;
+}
+
+.platform-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
 }
 
 /* -------------------------------------------------------------------------
