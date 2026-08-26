@@ -753,6 +753,799 @@ textarea:focus-visible {
     gap: 2rem;
   }
 
+.platform-figure--right {
+  float: right;
+  width: 40%;
+  max-width: 450px;
+  margin: 0 0 1.5rem 2rem;
+}
+
+.platform-figure--right img {
+  width: 100%;
+  display: block;
+  border-radius: var(--media-radius);
+}
+
+.platform-figure--right figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  opacity: 0.7;
+}
+
+  .hero-image-wrapper { order: -1; }
+  .hero-lead { max-width: none; }
+  .hero-wordmark img { max-width: 26rem; }
+  .donate-row { justify-content: center; text-align: center; }
+}
+
+@media (max-width: 700px) {
+  .platform-grid { grid-template-columns: 1fr; }
+  .hero-buttons .btn { flex: 1 1 12rem; }
+
+.platform-figure--right {
+    float: none;
+    width: auto;
+    max-width: none;
+    margin: 1.5rem 1rem;
+}
+
+
+/* ==========================================================================
+   CAMPAIGN BRANDING STYLESHEET (style.css)
+
+   Layout model: the page is a stack of full-bleed rounded colour PANELS inset
+   from the viewport edge, floating on the cream page background. Sections do
+   not sit on a shared background — each one IS a coloured container.
+
+   Sections:
+     1. Design tokens
+     2. Reset & base
+     3. Typography
+     4. Panel system
+     5. Layout utilities
+     6. Buttons
+     7. Forms
+     8. Masthead & navigation (lives inside the hero panel)
+     9. Hero
+    10. Record
+    11. Platform
+    12. Get involved
+    13. Donate band
+    14. Contact
+    15. Footer
+    16. Responsive
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS
+   Palette is fixed by the brand sheet. Do not introduce new hues.
+   -------------------------------------------------------------------------- */
+:root {
+  --blue:      #1A3FC7;  /* Persian Blue    */
+  --blue-dark: #0C1D60;  /* Persian Blue, darkened — panel fill only */
+  --red:      #F7002D;  /* Strawberry Red  */
+  --orange:   #FF8513;  /* Princeton Orange*/
+  --cream:    #EEE0D3;  /* Almond Cream    */
+  --bordeaux: #45000D;  /* Night Bordeaux  */
+  --white:    #FFFFFF;
+
+  /* Text pairings that clear WCAG AA. The palette is NOT interchangeable:
+       on --blue      -> white (8.1) or cream (6.3);  orange is 3.3, headings only
+       on --bordeaux  -> white (16.7), cream (12.9), orange (6.8)
+       on --orange    -> bordeaux (6.8) ONLY;         white is 2.4, never
+       on --red       -> white (4.2), large bold type only, never body copy
+       on --cream     -> bordeaux (12.9) or blue (6.3)
+     Use the --on-* tokens below rather than picking a hue by eye. */
+  --on-blue:      var(--white);
+  --on-blue-dark: var(--white);
+  --on-blue-soft: var(--cream);
+  --on-bordeaux:  var(--white);
+  --on-orange:    var(--bordeaux);
+  --on-red:       var(--white);
+  --on-cream:     var(--bordeaux);
+
+  /* Typography — Dela Gothic One headers, Simonetta body, per the brand sheet. */
+  --font-heading: 'Fugaz One', 'Dela Gothic One', Impact, 'Arial Black', sans-serif;
+  --font-body: 'Simonetta', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Panel geometry, measured off the reference build. */
+  --panel-radius: 15px;
+  --panel-inset: clamp(14px, 1.8vw, 26px);
+  --panel-gap: clamp(14px, 1.8vw, 26px);
+  --card-gap: 15px;
+  --panel-pad-y: clamp(2.75rem, 6vw, 4.75rem);
+  --card-radius: 15px;
+  --media-radius: 10px;
+  --pill: 999px;
+
+  --max-width: 1180px;
+
+
+  /* Hard shadow: a zero-blur solid offset, the same device the wordmark uses
+     for its red edge. Measured off Icon.png, that offset runs down and to the
+     RIGHT at ~2% of the mark's size. Flip the sign of both to move it left. */
+  --shadow-x: 8px;
+  --shadow-y: 8px;
+  --shadow-x-hover: 11px;
+  --shadow-y-hover: 11px;
+  --shadow-color: var(--bordeaux);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--on-cream);
+  background-color: var(--cream);
+  padding-top: var(--panel-inset);
+  padding-bottom: var(--shadow-y);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+.panel[id] { scroll-margin-top: var(--panel-inset); }
+
+:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Orange focus ring is invisible against an orange panel. */
+.panel--orange :focus-visible,
+.panel--red :focus-visible { outline-color: var(--bordeaux); }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--bordeaux);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  text-decoration: none;
+  border-radius: var(--pill);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus-visible { top: 1rem; color: var(--white); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .platform-card:hover,
+  .action-card:hover,
+  .btn-shadow:hover,
+  .btn-shadow:active { transform: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+  color: inherit;
+}
+
+h1 { font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3.4rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.6rem, 1.2rem + 1.7vw, 2.4rem); }
+h3 { font-size: clamp(1.55rem, 1.42rem + 0.55vw, 1.75rem); }
+
+p { margin-bottom: 1.25rem; }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; text-decoration: underline; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+
+strong { font-weight: 700; }
+
+/* --------------------------------------------------------------------------
+   4. PANEL SYSTEM
+   Each panel is a rounded colour block inset from the viewport edge. overflow
+   is hidden so inner bands and images clip to the panel's corners.
+   -------------------------------------------------------------------------- */
+.panel {
+  margin: 0 var(--panel-inset) var(--panel-gap);
+  padding: var(--panel-pad-y) 0;
+  border-radius: var(--panel-radius);
+  overflow: hidden;
+  --shadow-x: 4px;
+  --shadow-y: 4px;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+}
+
+.panel--blue     { background-color: var(--blue);     color: var(--on-blue); }
+.panel--bordeaux {
+  background-color: var(--bordeaux);
+  color: var(--on-bordeaux);
+  --shadow-color: var(--red);
+}
+.panel--orange {
+  background-color: var(--orange);
+  color: var(--on-orange);
+
+}
+.panel--red      { background-color: var(--red);      color: var(--on-red); }
+
+.panel--navy {
+  background-color: var(--blue-dark);
+  color: var(--on-blue-dark);
+  --shadow-color: var(--red);
+}
+
+/* The hero carries the masthead, so it opens tighter at the top. */
+.panel--hero { padding-top: 0; }
+
+/* Heading colour is set per surface. No heading is white anywhere: red is used
+   wherever it clears contrast, and the nearest non-white brand hue elsewhere.
+     on bordeaux -> red       3.97
+     on cream    -> red       3.25
+     on blue     -> orange    3.34  (red is 1.94, unusable)
+     on orange   -> bordeaux  6.84  (red is 1.73, unusable)
+     on red      -> bordeaux  3.97
+   The three-colour split is a contrast constraint, not a preference. */
+.panel--bordeaux :is(h1, h2, h3, h4, h5, h6) { color: var(--cream); }
+.panel--blue     :is(h1, h2, h3, h4, h5, h6) { color: var(--orange); }
+.panel--orange   :is(h1, h2, h3, h4, h5, h6) { color: var(--bordeaux); }
+.panel--red      :is(h1, h2, h3, h4, h5, h6) { color: var(--bordeaux); }
+.panel--navy     :is(h1, h2, h3, h4, h5, h6) { color: var(--red); }
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Texture rulings. One per block so no two adjacent panels share a pattern.
+   All are deliberately the same weight and scale so they read as one family
+   rather than as six different treatments. */
+.tex-rings {
+  background-image:
+    repeating-radial-gradient(circle at 0 0, transparent 0 13px, var(--ink) 13px 14px);
+}
+
+.tex-hatch {
+  background-image:
+    repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 8px);
+}
+
+.tex-cross {
+  background-image:
+    repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 9px);
+}
+
+.tex-graph {
+  background-image:
+    repeating-linear-gradient(0deg, var(--ink) 0 1px, transparent 1px 10px),
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 10px);
+}
+
+.tex-dots {
+  background-image:
+    radial-gradient(circle, var(--ink) 1px, transparent 1.2px),
+    radial-gradient(circle, var(--ink) 1px, transparent 1.2px);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
+}
+
+.tex-stripe {
+  background-image:
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 7px);
+}
+
+/* --------------------------------------------------------------------------
+   5. LAYOUT UTILITIES
+   -------------------------------------------------------------------------- */
+.text-center { text-align: center; }
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 1rem;
+}
+
+/* Eyebrow picks up the panel's accent rather than a fixed hue. */
+.panel--blue     .eyebrow { color: var(--cream); }
+.panel--bordeaux .eyebrow { color: var(--orange); }
+.panel--navy     .eyebrow { color: var(--orange); }
+.panel--orange   .eyebrow { color: var(--bordeaux); opacity: 0.75; }
+
+.section-intro {
+  font-size: clamp(1.05rem, 1rem + 0.35vw, 1.2rem);
+  max-width: 62ch;
+  margin: 0 auto 2.5rem;
+}
+
+.panel-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.grid-2-col > * { min-width: 0; }
+
+/* Where the text column runs much taller than its media, stretch the media to
+   fill instead of centring it — centring leaves a large empty band of panel
+   colour above and below the image. */
+.grid-2-col--stretch { align-items: stretch; }
+
+.grid-2-col--stretch .record-image-wrapper { display: flex; }
+
+.grid-2-col--stretch .record-image {
+  height: 100%;
+  aspect-ratio: auto;
+  min-height: 18rem;
+}
+
+/* Underline-to-highlight: one gradient anchored to the bottom of the line box,
+   2px tall at rest so it reads as an underline, animated to full height on
+   hover so it reads as a marker highlight. The text colour flips at the same
+   time — white on an orange highlight is 2.4:1 and would vanish. */
+.link-highlight {
+  --hl: var(--orange);
+  --hl-text: var(--bordeaux);
+  --hl-size: 2px;
+  background-image: linear-gradient(var(--hl), var(--hl));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% var(--hl-size);
+  padding: 0 0.18em 0.05em;
+  text-decoration: none;
+  transition: background-size 0.2s ease, color 0.2s ease;
+}
+
+.link-highlight:hover {
+  background-size: 100% 100%;
+  color: var(--hl-text);
+}
+
+/* Display variant: the resting band is a percentage of the LINE BOX rather than
+   a fixed rule, so it rides up over the bottom of the glyphs the way a marker
+   stroke would, instead of sitting clear underneath them. This is the detail
+   that makes the reference version read as a highlighter rather than a link. */
+.hl-display {
+  --hl-size: 38%;
+  padding: 0 0.06em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* --------------------------------------------------------------------------
+   6. BUTTONS
+   Pill-shaped, in a filled and an outlined variant, per the reference.
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 1rem 2.25rem;
+  border-radius: var(--pill);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-sm { font-size: 0.72rem; padding: 0.65rem 1.4rem; }
+
+/* Hard shadow on a button. Offsets are smaller than a card's because the
+   element is smaller; the pop is 2px. */
+.btn-shadow {
+  --shadow-x: 4px;
+  --shadow-y: 4px;
+  --shadow-x-hover: 6px;
+  --shadow-y-hover: 6px;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+              box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.btn-shadow:hover {
+  box-shadow: var(--shadow-x-hover) var(--shadow-y-hover) 0 var(--shadow-color);
+  transform: translate(calc(var(--shadow-x) - var(--shadow-x-hover)),
+                       calc(var(--shadow-y) - var(--shadow-y-hover)));
+}
+
+.btn-shadow:active {
+  box-shadow: none;
+  transform: translate(var(--shadow-x), var(--shadow-y));
+}
+.btn-block { width: 100%; }
+
+/* Solid orange: the primary call to action on blue and bordeaux panels. */
+.btn-orange {
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: var(--bordeaux);
+}
+.btn-orange:hover { background-color: var(--white); border-color: var(--white); }
+
+/* Solid bordeaux: the primary call to action on orange and red panels. */
+.btn-bordeaux {
+  background-color: var(--bordeaux);
+  border-color: var(--bordeaux);
+  color: var(--white);
+}
+.btn-bordeaux:hover { background-color: var(--blue); border-color: var(--blue); }
+
+.btn-cream {
+  background-color: var(--cream);
+  border-color: var(--cream);
+  color: var(--bordeaux);
+}
+.btn-cream:hover { background-color: var(--orange); border-color: var(--orange); }
+
+/* Outlined: takes its colour from the panel's text colour. */
+.btn-outline {
+  background-color: transparent;
+  border-color: currentColor;
+  color: inherit;
+}
+.panel--blue     .btn-outline:hover { background-color: var(--white); color: var(--blue); }
+.panel--bordeaux .btn-outline:hover { background-color: var(--white); color: var(--bordeaux); }
+.panel--orange   .btn-outline:hover { background-color: var(--bordeaux); color: var(--white); }
+.panel--red      .btn-outline:hover { background-color: var(--white); color: var(--red); }
+
+/* --------------------------------------------------------------------------
+   7. FORMS
+   -------------------------------------------------------------------------- */
+.form-field { margin-bottom: 1rem; }
+
+.form-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.85rem 1.1rem;
+  color: var(--bordeaux);
+  background-color: var(--white);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: border-color 0.2s ease;
+}
+
+textarea { resize: vertical; }
+
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+  border-color: var(--bordeaux);
+}
+
+/* --------------------------------------------------------------------------
+   8. MASTHEAD & NAVIGATION (inside the hero panel)
+   -------------------------------------------------------------------------- */
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 0 clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.platform-header {
+  padding-bottom: 0.2rem;
+}
+
+.platform-header .masthead {
+  padding-bottom: 0.7rem;
+}
+
+.logo {
+  display: block;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-mark {
+  width: auto;
+  height: clamp(1.35rem, 1.8vw, 1.75rem);
+}
+
+.main-nav ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.85rem);
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   9. HERO
+   -------------------------------------------------------------------------- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  padding-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.hero-wordmark {
+  margin-bottom: 1.25rem;
+}
+
+.hero-wordmark img {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+}
+
+/* Orange is the only non-white colour that clears contrast on blue (3.34), and
+   only as large text — hence the 1.55rem (~25px) floor, which keeps it over the
+   24px threshold even at 390px wide. */
+.hero-tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.55rem, 1.2rem + 1.4vw, 1.95rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+/* The highlight cannot also be orange here: at rest the band overlaps the
+   bottom of the glyphs, so orange-on-orange would merge into a blob. Cream
+   reads against both the blue panel and the orange type. */
+.hero-tagline .link-highlight {
+  --hl: var(--orange);
+  --hl-text: var(--bordeaux);
+}
+
+.hero-lead {
+  font-size: clamp(1.1rem, 1rem + 0.55vw, 1.35rem);
+  color: var(--cream);
+  max-width: 46ch;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+
+.hero-image,
+.record-image {
+  width: 100%;
+  border-radius: var(--media-radius);
+  background-color: var(--cream);
+  object-fit: cover;
+}
+
+.hero-image { aspect-ratio: 5 / 4; }
+.record-image { aspect-ratio: 9 / 7; }
+
+/* -------------------------------------------------------------------------
+   10. SHARED CONTENT UTILITIES
+   -------------------------------------------------------------------------- */
+.placeholder-note {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+
+/* Cards lift on hover: the shadow grows and the block steps back against it by
+   the same amount, so the card appears to rise rather than to stretch. */
+.platform-card,
+.action-card {
+  --shadow-x: 8px;
+  --shadow-y: 8px;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.platform-card:hover,
+.action-card:hover {
+  box-shadow: var(--shadow-x-hover) var(--shadow-y-hover) 0 var(--shadow-color);
+  transform: translate(calc(var(--shadow-x) - var(--shadow-x-hover)),
+                       calc(var(--shadow-y) - var(--shadow-y-hover)));
+}
+
+/* -------------------------------------------------------------------------
+   11. PLATFORM  — blue cards nested inside the orange panel
+   -------------------------------------------------------------------------- */
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--card-gap);
+}
+
+.platform-card {
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: var(--card-radius);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.platform-card h3 { color: var(--orange); }
+
+.platform-icon {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--orange);
+  margin-bottom: 1rem;
+}
+
+.platform-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
+}
+
+/* -------------------------------------------------------------------------
+   12. GET INVOLVED — bordeaux cards nested inside the blue panel
+   -------------------------------------------------------------------------- */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--card-gap);
+  text-align: left;
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--cream);
+  color: var(--bordeaux);
+  border-radius: var(--card-radius);
+  padding: clamp(1.75rem, 3vw, 2.25rem);
+}
+
+.action-card h3 { color: var(--red); }
+.action-card p { flex-grow: 1; }
+.action-card .btn { margin-top: 1.5rem; }
+
+/* -------------------------------------------------------------------------
+   13. DONATE BAND
+   Red carries white text at 4.2:1 — fine for this large bold type, which is
+   why this panel holds a headline and a button and no body copy.
+   -------------------------------------------------------------------------- */
+.panel--donate {
+  padding-top: clamp(2.25rem, 4vw, 3rem);
+  padding-bottom: clamp(2.25rem, 4vw, 3rem);
+}
+
+.donate-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 2.5rem;
+  flex-wrap: wrap;
+}
+
+.donate-row h2 { margin-bottom: 0; font-size: clamp(1.4rem, 1.05rem + 1.5vw, 2.1rem); }
+
+.donate-row p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0;
+}
+
+/* -------------------------------------------------------------------------
+   14. CONTACT
+   -------------------------------------------------------------------------- */
+.contact-details {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.contact-details p { margin-bottom: 0.6rem; }
+.contact-details a { color: var(--orange); }
+.contact-details .link-highlight:hover { color: var(--bordeaux); }
+
+.contact-card {
+  background-color: var(--cream);
+  color: var(--bordeaux);
+  --shadow-color: var(--red);
+  --shadow-x: 4px;
+  --shadow-y: 4px;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+  border-radius: var(--card-radius);
+  padding: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.contact-card h3 { color: var(--red); }
+
+.contact-card :is(input, textarea) { border-color: var(--bordeaux); }
+
+/* -------------------------------------------------------------------------
+   15. FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+  margin: 0 var(--panel-inset) var(--panel-inset);
+  padding: 2.25rem 0;
+  border-radius: var(--panel-radius);
+  background-color: var(--blue);
+  color: var(--cream);
+  font-size: 0.9rem;
+  --shadow-color: var(--bordeaux);
+  --shadow-x: 4px;
+  --shadow-y: 4px;
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+}
+
+.site-footer a { color: var(--cream); }
+.disclaimer { font-size: 0.8rem; opacity: 0.88; margin-top: 0.5rem; }
+
+/* -------------------------------------------------------------------------
+   16. RESPONSIVE
+   One breakpoint: the masthead stacks and every two-column grid collapses at
+   the same width, so there is no band where the copy is squeezed.
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .masthead { justify-content: center; gap: 1rem 1.25rem; }
+  .logo { flex-basis: 100%; text-align: center; }
+  .logo-mark { margin-inline: auto; }
+  .main-nav ul { justify-content: center; }
+
+  .grid-2-col,
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
 
 
   .hero-image-wrapper { order: -1; }
