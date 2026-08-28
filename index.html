@@ -39,19 +39,20 @@
       <div class="masthead">
         <a href="index.html" class="logo" aria-label="Sam Holland for Oak Bay Mayor — home">
           <img src="assets/logo-wordmark-horizontal.svg" alt=""
-               class="logo-mark" width="340" height="170">
+               class="logo-mark" width="600" height="300">
         </a>
 
         <nav class="main-nav" aria-label="Main">
           <ul>
-            <li><a href="#about" class="link-highlight">About</a></li>
+            <li><a href="about.html" class="link-highlight">About</a></li>
             <li><a href="platform.html" class="link-highlight">Platform</a></li>
-            <li><a href="#get-involved" class="link-highlight">Get Involved</a></li>
+            <li><a href="/volunteer.html" class="link-highlight">Get Involved</a></li>
+            <li><a href="/lawn.html" class="link-highlight">Request a Sign</a></li>
             <li><a href="#contact" class="link-highlight">Contact</a></li>
           </ul>
         </nav>
 
-        <a href="#donate" class="btn btn-outline btn-sm">Donate</a>
+        <a href="/donate.html" class="btn btn-outline btn-sm">Donate</a>
       </div>
 
       <div class="hero-grid">
@@ -71,8 +72,8 @@
         </div>
 
         <div class="hero-image-wrapper">
-          <img src="assets/candidate-hero.svg" alt="Sam Holland candidate portrait"
-               class="hero-image" width="800" height="900" decoding="async">
+          <img src="assets/suit-portrait.png" alt="Sam Holland candidate portrait"
+               class="hero-image" width="3024" height="4032" decoding="async">
         </div>
       </div>
 
@@ -88,8 +89,8 @@
       <div class="grid-2-col grid-2-col--stretch">
 
         <div class="record-image-wrapper">
-          <img src="assets/candidate-community.svg" alt="Sam Holland talking with residents at a community event"
-               class="record-image" width="900" height="700" loading="lazy" decoding="async">
+          <img src="assets/mountain-peak.png" alt="Sam at the peak of Ben Nevis, on a journey to summit the three highest mountains in Scotland, Wales, and England in 24 hours."
+               class="record-image" width="4032" height="2268" loading="lazy" decoding="async">
         </div>
 
         <div class="record-content">
@@ -110,7 +111,7 @@
   </section>
 
   <!-- ==========================================================================
-     PLATFORM — orange panel with blue cards nested inside it. Orange carries
+     PRIORITIES — orange panel with blue cards nested inside it. Orange carries
      bordeaux text only, so all panel-level copy here is bordeaux.
 
      TODO(sam): the four headings below are your own four themes, taken from the
@@ -122,7 +123,7 @@
     <div class="container">
       <div class="panel-head text-center">
         <span class="eyebrow">Looking Ahead</span>
-        <h2>Key Platform Priorities</h2>
+        <h2>Key Priorities</h2>
         <p class="section-intro">Four core focuses for Oak Bay's next four years.</p>
       </div>
 
@@ -137,7 +138,7 @@
         <div class="platform-card">
           <div class="platform-icon" aria-hidden="true">02</div>
           <h3>Healthcare</h3>
-          <p class="placeholder-note">I don't have a family doctor. My mom has waited for more than a year for a hip surgery that keeps her from doing the things she loves, and the date keeps getting pushed back. My friends with chronic medical conditions are left to self-manage medications because they can't get in to see a doctor more than once or twice a year. These are the kinds of problems I want to see Oak Bay working to fix.</p>
+          <p class="placeholder-note">I don't have a family doctor. My mom has waited for more than a year for a hip surgery that keeps her from doing the things she loves, and the date keeps getting pushed back. My friends with chronic medical conditions are left to self-manage medications because they can't get in to see a doctor more than once or twice a year. While healthcare is a Provincial responsibility, Oak Bay has the power to make a major difference.</p>
         </div>
 
         <div class="platform-card">
@@ -176,20 +177,20 @@
         <div class="action-card">
           <h3>Request a Lawn Sign</h3>
           <p>Show your support for the campaign. We will deliver and install a lawn sign right to your yard.</p>
-          <a href="#contact" class="btn btn-bordeaux btn-sm">Request a Sign</a>
+          <a href="/lawn.html" class="btn btn-bordeaux btn-sm">Request a Sign</a>
         </div>
 
         <div class="action-card">
           <h3>Join the Team</h3>
           <p>Help us drop flyers, place phone calls, or greet voters at upcoming community town halls.</p>
-          <a href="#contact" class="btn btn-bordeaux btn-sm">Sign Up to Volunteer</a>
+          <a href="/volunteer.html" class="btn btn-bordeaux btn-sm">Sign Up to Volunteer</a>
         </div>
 
         <div class="action-card">
           <h3>Chip In Today</h3>
           <p>Your contribution directly funds outreach materials, lawn signs, and newspaper notices.</p>
           <!-- TODO(sam): point at the real donation page. -->
-          <a href="PLACEHOLDER" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+          <a href="/donate.html" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
             Donate Online <span class="visually-hidden">(opens in a new tab)</span>
           </a>
         </div>
@@ -209,7 +210,7 @@
           <h2>Chip in to the campaign</h2>
           <p>Every contribution goes straight to reaching voters.</p>
         </div>
-        <a href="PLACEHOLDER" target="_blank" rel="noopener" class="btn btn-cream">
+        <a href="/donate.html" target="_blank" rel="noopener" class="btn btn-cream">
           Donate Now <span class="visually-hidden">(opens in a new tab)</span>
         </a>
       </div>
@@ -230,27 +231,6 @@
           <div class="contact-details">
             <p><strong>Email:</strong> <a href="mailto:vote@samuelholland.ca" class="link-highlight">vote@samuelholland.ca</a></p>
           </div>
-        </div>
-
-        <div class="contact-card">
-          <h3>Sign Up for Updates</h3>
-          <!-- TODO(sam): replace `your-form-id` with the real Formspree endpoint.
-               Until then this form does not deliver. -->
-          <form action="https://formspree.io/f/your-form-id" method="POST">
-            <div class="form-field">
-              <label for="contact-name">Your full name</label>
-              <input type="text" id="contact-name" name="name" autocomplete="name" required>
-            </div>
-            <div class="form-field">
-              <label for="contact-email">Your email address</label>
-              <input type="email" id="contact-email" name="email" autocomplete="email" required>
-            </div>
-            <div class="form-field">
-              <label for="contact-message">How would you like to get involved? <span>(optional)</span></label>
-              <textarea id="contact-message" name="message" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-bordeaux btn-block">Join the Campaign</button>
-          </form>
         </div>
 
       </div>
