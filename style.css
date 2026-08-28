@@ -740,7 +740,39 @@ textarea:focus-visible {
 /* --------------------------------------------------------------------------
    16. RESPONSIVE
    -------------------------------------------------------------------------- */
+/* ==========================================================================
+   PLATFORM CARDS — RESPONSIVE
+   ========================================================================== */
 
+/* Prevent card content from forcing the grid wider than its container. */
+.platform-grid {
+  width: 100%;
+}
+
+.platform-card {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* Tablet and smaller: force the four platform cards into one column. */
+@media (max-width: 900px) {
+  .platform-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .platform-card {
+    width: 100%;
+  }
+}
+
+/* Small phones: keep a single column and give the cards slightly less
+   horizontal padding so long text has more usable line width. */
+@media (max-width: 480px) {
+  .platform-card {
+    padding: 1.5rem;
+  }
+}
 /* ==========================================================================
    PLATFORM ACCORDION
    ========================================================================== */
