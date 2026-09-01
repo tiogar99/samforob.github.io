@@ -733,6 +733,22 @@ textarea:focus-visible {
   --shadow-y: 4px;
   box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
 }
+.footer-endorsement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-endorsement p {
+  margin: 0;
+}
+
+.footer-endorsement .logo-mark {
+  width: clamp(150px, 20vw, 220px);
+  height: auto;
+}
 
 .site-footer a { color: var(--cream); }
 .disclaimer { font-size: 0.8rem; opacity: 0.88; margin-top: 0.5rem; }
@@ -765,6 +781,14 @@ textarea:focus-visible {
     width: 100%;
   }
 }
+
+@media (max-width: 600px) {
+  .footer-endorsement {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
 
 /* Small phones: keep a single column and give the cards slightly less
    horizontal padding so long text has more usable line width. */
