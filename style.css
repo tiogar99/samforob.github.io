@@ -306,7 +306,9 @@ strong { font-weight: 700; }
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
 }
-
+.grid-2-col--top {
+  align-items: start;
+}
 .grid-2-col > * { min-width: 0; }
 
 /* Where the text column runs much taller than its media, stretch the media to
