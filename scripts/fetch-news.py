@@ -1,27 +1,110 @@
-import html
+import json
+import re
+import urllib.parse
+import urllib.request
+from html import escape
 from pathlib import Path
 
-OUTPUT_HTML = Path("news.html")
+# Paths
+SCRIPT_DIR = Path(__file__).parent
+NEWS_JSON_FILE = SCRIPT_DIR / "news.json"
+NEWS_HTML_FILE = SCRIPT_DIR / "news.html"
 
-def generate_html(articles):
-    """Generates news.html using existing style.css classes directly."""
+# Default RSS/Search API Query for media coverage
+SEARCH_QUERY = "Sam Holland Oak Bay Mayor"
+
+
+# --- STEP 1: FETCH METADATA & UPDATE NEWS.JSON ---
+def fetch_latest_news_metadata(query=SEARCH_QUERY):
+    """Fetches news metadata via Google News RSS feed and updates news.json."""
+    encoded_query = urllib.parse.quote(query)
+    rss_url = f"https://news.google.com/rss/search?q={encoded_query}&hl=en-CA&gl=CA&ceid=CA:en"
+
+    # Minimal XML parsing without extra dependencies
+    req = urllib.request.Request(
+        rss_url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+    )
+
+    items = []
+    try:
+        with urllib.request.urlopen(req) as response:
+            xml_data = response.read().decode("utf-8")
+
+        # Parse <item> tags out of RSS XML
+        raw_items = re.findall(r"<item>(.*?)</item>", xml_data, re.DOTALL)
+        for item in raw_items:
+            title_match = re.search(r"<title>(.*?)</title>", item)
+            link_match = re.search(r"<link>(.*?)</link>", item)
+            pub_date_match = re.search(r"<pubDate>(.*?)</pubDate>", item)
+
+            title = title_match.group(1) if title_match else ""
+            url = link_match.group(1) if link_match else ""
+            published = pub_date_match.group(1) if pub_date_match else ""
+
+            # Extract publisher from Google News title format "Title - Publisher"
+            publisher = "Media"
+            if " - " in title:
+                parts = title.rsplit(" - ", 1)
+                title = parts[0]
+                publisher = parts[1]
+
+            if title and url:
+                items.append(
+                    {
+                        "title": title,
+                        "url": url,
+                        "publisher": publisher,
+                        "published": published,
+                        "description": f"Recent coverage regarding Sam Holland's campaign for Oak Bay Mayor in {publisher}.",
+                        "image": "",  # Optional thumbnail relative path
+                    }
+                )
+    except Exception as e:
+        print(f"Warning: Could not fetch live news feed ({e}). Skipping RSS update.")
+
+    # Load existing JSON if available to prevent wiping manually curated articles
+    existing_articles = []
+    if NEWS_JSON_FILE.exists():
+        try:
+            with NEWS_JSON_FILE.open("r", encoding="utf-8") as f:
+                existing_articles = json.load(f)
+        except json.JSONDecodeError:
+            existing_articles = []
+
+    # Merge unique articles by URL
+    seen_urls = {a.get("url") for a in existing_articles if "url" in a}
+    for item in items:
+        if item["url"] not in seen_urls:
+            existing_articles.insert(0, item)
+            seen_urls.add(item["url"])
+
+    # Write updated payload back to news.json
+    with NEWS_JSON_FILE.open("w", encoding="utf-8") as f:
+        json.dump(existing_articles, f, indent=2, ensure_ascii=False)
+
+    print(f"Updated metadata in {NEWS_JSON_FILE.name} ({len(existing_articles)} total articles)")
+    return existing_articles
+
+
+# --- STEP 2: BUILD CARD HTML ---
+def build_cards_markup(articles):
+    """Transforms article dicts into .action-card HTML elements."""
     cards_html = []
-
     for item in articles:
-        title = html.escape(item.get("title", ""))
-        url = html.escape(item.get("url", "#"))
-        publisher = html.escape(item.get("publisher", ""))
-        description = html.escape(item.get("description", ""))
+        title = escape(item.get("title", ""))
+        url = escape(item.get("url", "#"))
+        publisher = escape(item.get("publisher", ""))
+        description = escape(item.get("description", ""))
         image = item.get("image", "")
-        published = html.escape(item.get("published", ""))
-        published_date = published[:10] if published else ""
+        published = escape(item.get("published", ""))
+        published_date = published[:16] if published else ""
 
-        # Image element using site's border-radius token
         image_markup = (
             f'<a href="{url}" target="_blank" rel="noopener">'
-            f'<img src="{html.escape(image)}" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy">'
-            f'</a>'
-            if image else ""
+            f'<img src="{escape(image)}" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy">'
+            f"</a>"
+            if image
+            else ""
         )
 
         date_markup = f" &bull; {published_date}" if published_date else ""
@@ -35,89 +118,40 @@ def generate_html(articles):
           <a href="{url}" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
             Read Article <span class="visually-hidden">(opens in a new tab)</span>
           </a>
-        </article>
-        """)
+        </article>""")
 
-    full_html = f"""<!DOCTYPE html>
-<html lang="en-CA">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>In The News | Sam Holland for Oak Bay Mayor</title>
-  <meta name="description" content="Recent media coverage and news articles mentioning Sam Holland's campaign for Mayor of Oak Bay.">
-  <link rel="canonical" href="https://samuelholland.ca/news.html">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#1A3FC7">
+    return "\n".join(cards_html)
 
-  <link rel="icon" href="/assets/icon.png" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/icon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Simonetta&family=Fugaz+One&display=swap">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+# --- STEP 3: SURGICALLY UPDATE NEWS.HTML ---
+def update_news_html_target(cards_markup):
+    """Replaces ONLY the inner content of <div class="action-grid"> inside news.html."""
+    if not NEWS_HTML_FILE.exists():
+        print(f"Error: {NEWS_HTML_FILE.name} not found.")
+        return
 
-  <a href="#main" class="skip-link">Skip to main content</a>
+    content = NEWS_HTML_FILE.read_text(encoding="utf-8")
 
-  <main id="main">
-    <section class="panel panel--blue tex-rings">
-      <div class="container">
-        
-        <div class="masthead">
-          <a href="/" class="logo" aria-label="Sam Holland for Oak Bay Mayor — home">
-            <img src="assets/logo-wordmark-horizontal.svg" alt="Sam Holland for Oak Bay Mayor" class="logo-mark" width="600" height="300">
-          </a>
+    # Regex targeting content between <div class="action-grid"> and its matching </div>
+    pattern = r'(<div\s+class=["\']action-grid["\']>)(.*?)(</div>\s*</div>\s*</section>)'
 
-          <nav class="main-nav" aria-label="Main">
-            <ul>
-              <li><a href="/" class="link-highlight">Home</a></li>
-              <li><a href="about.html" class="link-highlight">About</a></li>
-              <li><a href="platform.html" class="link-highlight">Platform</a></li>
-              <li><a href="news.html" class="link-highlight">News</a></li>
-              <li><a href="/volunteer.html" class="link-highlight">Get Involved</a></li>
-              <li><a href="/lawn.html" class="link-highlight">Request a Sign</a></li>
-              <li><a href="/vote.html" class="link-highlight">How to Vote</a></li>
-              <li><a href="/#contact" class="link-highlight">Contact</a></li>
-            </ul>
-          </nav>
+    replacement = f"\\1\n{cards_markup}\n        \\3"
 
-          <a href="/donate.html" class="btn btn-outline btn-sm">Donate</a>
-        </div>
+    new_content, count = re.subn(pattern, replacement, content, flags=re.DOTALL)
 
-        <div class="panel-head text-center" style="margin-top: 2rem;">
-          <span class="eyebrow">Media & Press</span>
-          <h2>In The News</h2>
-          <p class="section-intro">Articles and media coverage referencing Sam Holland's campaign for Oak Bay Mayor.</p>
-        </div>
+    if count == 0:
+        print(
+            "Target marker `<div class=\"action-grid\">` was not found in news.html. "
+            "Ensure the HTML contains <div class=\"action-grid\"></div>."
+        )
+        return
 
-      </div>
-    </section>
+    NEWS_HTML_FILE.write_text(new_content, encoding="utf-8")
+    print(f"Surgically updated bottom section in {NEWS_HTML_FILE.name} without altering header or footer.")
 
-    <section class="panel panel--blue tex-cross">
-      <div class="container">
-        <div class="action-grid">
-          {"".join(cards_html)}
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <footer class="site-footer tex-hatch">
-    <div class="container text-center">
-      <div class="footer-endorsement">
-        <h2>Endorsed by the <a href="https://victorialabour.ca/2026-municipal-endorsements/" target="_blank" rel="noopener">Victoria Labour Council</a></h2>
-        <img src="assets/VLC_logo.jpg" alt="Victoria Labour Council logo" class="logo-mark" width="600" height="300">
-      </div>
-      <p>&copy; 2026 Sam Holland for Oak Bay Mayor. All rights reserved.</p>
-      <p class="disclaimer">Authorized by Sam Holland.</p>
-    </div>
-  </footer>
-
-</body>
-</html>
-"""
-
-    with OUTPUT_HTML.open("w", encoding="utf-8") as file:
-        file.write(full_html)
+# --- EXECUTION ---
+if __name__ == "__main__":
+    articles = fetch_latest_news_metadata()
+    cards_html = build_cards_markup(articles)
+    update_news_html_target(cards_html)
