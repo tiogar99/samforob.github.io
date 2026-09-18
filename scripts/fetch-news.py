@@ -1,247 +1,123 @@
-#!/usr/bin/env python3
-
 import html
-import json
-import time
-from datetime import datetime, timezone
-from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urljoin, urlparse
-from urllib.request import Request, urlopen
 
+OUTPUT_HTML = Path("news.html")
 
-ROOT = Path(__file__).resolve().parents[1]
+def generate_html(articles):
+    """Generates news.html using existing style.css classes directly."""
+    cards_html = []
 
-SOURCE_FILE = ROOT / "data" / "news-sources.json"
-OUTPUT_FILE = ROOT / "data" / "news.json"
+    for item in articles:
+        title = html.escape(item.get("title", ""))
+        url = html.escape(item.get("url", "#"))
+        publisher = html.escape(item.get("publisher", ""))
+        description = html.escape(item.get("description", ""))
+        image = item.get("image", "")
+        published = html.escape(item.get("published", ""))
+        published_date = published[:10] if published else ""
 
-USER_AGENT = (
-    "Mozilla/5.0 (compatible; CampaignNewsMetadata/1.0; "
-    "+https://samforob.github.io/)"
-)
-
-TIMEOUT = 15
-MAX_BYTES = 2_000_000
-
-
-class MetadataParser(HTMLParser):
-    """Extract useful metadata from an article's <head>."""
-
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-
-        self.meta = {}
-        self.title = ""
-        self.canonical = ""
-
-        self.in_title = False
-        self.title_parts = []
-
-    def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-
-        if tag.lower() == "title":
-            self.in_title = True
-            return
-
-        if tag.lower() == "meta":
-            property_name = attrs.get("property", "").lower()
-            name = attrs.get("name", "").lower()
-            content = attrs.get("content", "")
-
-            if content:
-                if property_name:
-                    self.meta[property_name] = content.strip()
-
-                if name:
-                    self.meta[name] = content.strip()
-
-        elif tag.lower() == "link":
-            rel = attrs.get("rel", "").lower()
-
-            if "canonical" in rel and attrs.get("href"):
-                self.canonical = attrs["href"].strip()
-
-    def handle_endtag(self, tag):
-        if tag.lower() == "title":
-            self.in_title = False
-            self.title = " ".join(self.title_parts).strip()
-
-    def handle_data(self, data):
-        if self.in_title:
-            self.title_parts.append(data)
-
-
-def clean(value):
-    if not value:
-        return ""
-
-    return html.unescape(" ".join(value.split())).strip()
-
-
-def fetch_page(url):
-    request = Request(
-        url,
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "text/html,application/xhtml+xml",
-        },
-    )
-
-    with urlopen(request, timeout=TIMEOUT) as response:
-        final_url = response.geturl()
-        content_type = response.headers.get("Content-Type", "")
-
-        if "text/html" not in content_type.lower():
-            raise ValueError(
-                f"URL did not return HTML ({content_type})"
-            )
-
-        body = response.read(MAX_BYTES)
-
-    encoding = "utf-8"
-
-    # Most modern pages are UTF-8. This fallback handles common
-    # legacy pages that explicitly declare another charset.
-    charset = response.headers.get_content_charset()
-
-    if charset:
-        encoding = charset
-
-    return (
-        final_url,
-        body.decode(encoding, errors="replace"),
-    )
-
-
-def get_metadata(source_url):
-    final_url, page = fetch_page(source_url)
-
-    parser = MetadataParser()
-    parser.feed(page)
-
-    parsed = urlparse(final_url)
-    domain = parsed.netloc.lower().removeprefix("www.")
-
-    meta = parser.meta
-
-    article_url = (
-        urljoin(final_url, parser.canonical)
-        if parser.canonical
-        else final_url
-    )
-
-    title = clean(
-        meta.get("og:title")
-        or meta.get("twitter:title")
-        or parser.title
-        or final_url
-    )
-
-    description = clean(
-        meta.get("og:description")
-        or meta.get("twitter:description")
-        or meta.get("description")
-    )
-
-    image = (
-        meta.get("og:image")
-        or meta.get("twitter:image")
-        or ""
-    )
-
-    if image:
-        image = urljoin(final_url, image)
-
-    publisher = clean(
-        meta.get("og:site_name")
-        or meta.get("application-name")
-        or domain
-    )
-
-    published = clean(
-        meta.get("article:published_time")
-        or meta.get("date")
-        or meta.get("pubdate")
-        or meta.get("datepublished")
-    )
-
-    return {
-        "url": article_url,
-        "title": title,
-        "description": description,
-        "image": image,
-        "publisher": publisher,
-        "published": published,
-        "domain": domain,
-        "fetched": datetime.now(timezone.utc).isoformat(),
-    }
-
-
-def main():
-    if not SOURCE_FILE.exists():
-        raise FileNotFoundError(
-            f"Missing source file: {SOURCE_FILE}"
+        # Image element using site's border-radius token
+        image_markup = (
+            f'<a href="{url}" target="_blank" rel="noopener">'
+            f'<img src="{html.escape(image)}" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy">'
+            f'</a>'
+            if image else ""
         )
 
-    with SOURCE_FILE.open("r", encoding="utf-8") as file:
-        sources = json.load(file)
+        date_markup = f" &bull; {published_date}" if published_date else ""
 
-    if not isinstance(sources, list):
-        raise ValueError(
-            "news-sources.json must contain a JSON array."
-        )
+        cards_html.append(f"""
+        <article class="action-card">
+          {image_markup}
+          <span class="eyebrow">{publisher}{date_markup}</span>
+          <h3><a href="{url}" target="_blank" rel="noopener">{title}</a></h3>
+          <p>{description}</p>
+          <a href="{url}" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+            Read Article <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </article>
+        """)
 
-    results = []
+    full_html = f"""<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In The News | Sam Holland for Oak Bay Mayor</title>
+  <meta name="description" content="Recent media coverage and news articles mentioning Sam Holland's campaign for Mayor of Oak Bay.">
+  <link rel="canonical" href="https://samuelholland.ca/news.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#1A3FC7">
 
-    for index, source in enumerate(sources, start=1):
-        if not isinstance(source, dict) or not source.get("url"):
-            print(f"Skipping invalid entry #{index}")
-            continue
+  <link rel="icon" href="/assets/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/icon.png">
 
-        source_url = source["url"].strip()
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Simonetta&family=Fugaz+One&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-        parsed = urlparse(source_url)
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-        if parsed.scheme not in ("http", "https"):
-            print(f"Skipping non-web URL: {source_url}")
-            continue
+  <main id="main">
+    <section class="panel panel--blue tex-rings">
+      <div class="container">
+        
+        <div class="masthead">
+          <a href="/" class="logo" aria-label="Sam Holland for Oak Bay Mayor — home">
+            <img src="assets/logo-wordmark-horizontal.svg" alt="Sam Holland for Oak Bay Mayor" class="logo-mark" width="600" height="300">
+          </a>
 
-        print(f"[{index}/{len(sources)}] Fetching {source_url}")
+          <nav class="main-nav" aria-label="Main">
+            <ul>
+              <li><a href="/" class="link-highlight">Home</a></li>
+              <li><a href="about.html" class="link-highlight">About</a></li>
+              <li><a href="platform.html" class="link-highlight">Platform</a></li>
+              <li><a href="news.html" class="link-highlight">News</a></li>
+              <li><a href="/volunteer.html" class="link-highlight">Get Involved</a></li>
+              <li><a href="/lawn.html" class="link-highlight">Request a Sign</a></li>
+              <li><a href="/vote.html" class="link-highlight">How to Vote</a></li>
+              <li><a href="/#contact" class="link-highlight">Contact</a></li>
+            </ul>
+          </nav>
 
-        try:
-            article = get_metadata(source_url)
-            results.append(article)
+          <a href="/donate.html" class="btn btn-outline btn-sm">Donate</a>
+        </div>
 
-        except Exception as error:
-            print(f"  WARNING: {error}")
+        <div class="panel-head text-center" style="margin-top: 2rem;">
+          <span class="eyebrow">Media & Press</span>
+          <h2>In The News</h2>
+          <p class="section-intro">Articles and media coverage referencing Sam Holland's campaign for Oak Bay Mayor.</p>
+        </div>
 
-            results.append({
-                "url": source_url,
-                "title": source_url,
-                "description": "",
-                "image": "",
-                "publisher": urlparse(source_url).netloc,
-                "published": "",
-                "domain": urlparse(source_url).netloc,
-                "fetched": datetime.now(timezone.utc).isoformat(),
-                "error": str(error),
-            })
+      </div>
+    </section>
 
-        # Be polite to publishers and avoid hammering sites.
-        time.sleep(1)
+    <section class="panel panel--blue tex-cross">
+      <div class="container">
+        <div class="action-grid">
+          {"".join(cards_html)}
+        </div>
+      </div>
+    </section>
+  </main>
 
-    with OUTPUT_FILE.open("w", encoding="utf-8") as file:
-        json.dump(
-            results,
-            file,
-            indent=2,
-            ensure_ascii=False,
-        )
-        file.write("\n")
+  <footer class="site-footer tex-hatch">
+    <div class="container text-center">
+      <div class="footer-endorsement">
+        <h2>Endorsed by the <a href="https://victorialabour.ca/2026-municipal-endorsements/" target="_blank" rel="noopener">Victoria Labour Council</a></h2>
+        <img src="assets/VLC_logo.jpg" alt="Victoria Labour Council logo" class="logo-mark" width="600" height="300">
+      </div>
+      <p>&copy; 2026 Sam Holland for Oak Bay Mayor. All rights reserved.</p>
+      <p class="disclaimer">Authorized by Sam Holland.</p>
+    </div>
+  </footer>
 
-    print(f"\nWrote {len(results)} articles to {OUTPUT_FILE}")
+</body>
+</html>
+"""
 
-
-if __name__ == "__main__":
-    main()
+    with OUTPUT_HTML.open("w", encoding="utf-8") as file:
+        file.write(full_html)
