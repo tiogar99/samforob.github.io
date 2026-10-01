@@ -53,7 +53,13 @@
        <nav class="main-nav" aria-label="Main">
         <ul>
            <li><a href="/" class="link-highlight">Home</a></li>
-             <li><a href="about.html" class="link-highlight">About</a></li>
+            <li class="nav-dropdown">
+              <button type="button" class="link-highlight" aria-expanded="false" aria-controls="nav-about-menu">About</button>
+              <ul id="nav-about-menu">
+                <li><a href="about.html" class="link-highlight">About Sam</a></li>
+                <li><a href="news.html" class="link-highlight">News</a></li>
+              </ul>
+            </li>
             <li><a href="platform.html" class="link-highlight">Platform</a></li>
             <li><a href="/volunteer.html" class="link-highlight">Get Involved</a></li>
             <li><a href="/lawn.html" class="link-highlight">Request a Sign</a></li>
@@ -174,5 +180,6 @@
   </div>
 </footer>
 
+  <script src="nav.js" defer></script>
 </body>
 </html>

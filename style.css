@@ -487,6 +487,9 @@ textarea:focus-visible {
 
 .platform-header {
   padding-bottom: 0.2rem;
+  /* This header holds only the masthead, so nothing needs clipping, and the
+     nav's About dropdown has to hang below the panel. */
+  overflow: visible;
 }
 
 .platform-header .masthead {
@@ -518,6 +521,79 @@ textarea:focus-visible {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--white);
+}
+
+/* Nav dropdown (About): opens on hover with a mouse, on keyboard focus, and on
+   tap via nav.js (touch screens have no hover). */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown > button {
+  display: inline-block;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav-dropdown > button::after {
+  content: "";
+  display: inline-block;
+  margin-left: 0.4em;
+  border: 0.3em solid transparent;
+  border-top-color: currentColor;
+  border-bottom: 0;
+  vertical-align: 0.15em;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown > button:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.main-nav .nav-dropdown ul {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 0;
+  z-index: 10;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  min-width: max-content;
+  padding: 0.9rem 1.1rem;
+  background-color: var(--bordeaux);
+  border-radius: var(--card-radius);
+}
+
+/* Invisible bridge over the gap above the menu, so moving the mouse from
+   "About" down to the links doesn't count as leaving the dropdown. */
+.main-nav .nav-dropdown ul::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 0.6rem;
+}
+
+/* :focus-visible rather than :focus-within, so a mouse click doesn't leave
+   the menu stuck open after the pointer moves away. */
+.main-nav .nav-dropdown:hover ul,
+.main-nav .nav-dropdown:has(:focus-visible) ul,
+.main-nav .nav-dropdown.is-open ul {
+  display: flex;
+}
+
+.nav-dropdown:hover > button::after,
+.nav-dropdown:has(:focus-visible) > button::after,
+.nav-dropdown.is-open > button::after {
+  transform: rotate(180deg);
 }
 
 /* --------------------------------------------------------------------------
@@ -661,6 +737,18 @@ textarea:focus-visible {
   color: var(--bordeaux);
   border-radius: var(--card-radius);
   padding: clamp(1.75rem, 3vw, 2.25rem);
+}
+
+/* News page: fixed columns rather than auto-fit, so wide screens get three
+   cards per row instead of four, tablets two, and phones one. */
+.action-grid--news { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 900px) {
+  .action-grid--news { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .action-grid--news { grid-template-columns: 1fr; }
 }
 
 .action-card h3 { color: var(--red); }

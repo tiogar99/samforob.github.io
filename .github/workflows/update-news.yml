@@ -17,7 +17,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Fetch article metadata
+      - name: Fetch articles and rebuild news.html
         run: python3 scripts/fetch-news.py
 
       - name: Commit generated metadata
@@ -25,11 +25,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add data/news.json
+          git add data/news.json news.html
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Update news metadata"
+            git commit -m "Update news articles"
             git push
           fi

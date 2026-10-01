@@ -53,7 +53,13 @@
       <nav class="main-nav" aria-label="Main">
         <ul>
            <li><a href="/" class="link-highlight">Home</a></li>
-             <li><a href="about.html" class="link-highlight">About</a></li>
+            <li class="nav-dropdown">
+              <button type="button" class="link-highlight" aria-expanded="false" aria-controls="nav-about-menu">About</button>
+              <ul id="nav-about-menu">
+                <li><a href="about.html" class="link-highlight">About Sam</a></li>
+                <li><a href="news.html" class="link-highlight">News</a></li>
+              </ul>
+            </li>
             <li><a href="platform.html" class="link-highlight">Platform</a></li>
             <li><a href="/volunteer.html" class="link-highlight">Get Involved</a></li>
             <li><a href="/lawn.html" class="link-highlight">Request a Sign</a></li>
@@ -75,12 +81,223 @@
   </section>
 
 
-<!-- Target Section (Python updates ONLY inside .action-grid) -->
+<!-- Target Section: scripts/fetch-news.py rewrites everything between the
+     NEWS:START and NEWS:END markers. Edit data/news.json, not the cards. -->
     <section class="panel panel--blue tex-cross">
       <div class="container">
-        <div class="action-grid">
-          <!-- Python inserts dynamic <article class="action-card"> elements right here -->
-
+        <div class="action-grid action-grid--news">
+          <!-- NEWS:START -->
+          <article class="action-card">
+            
+            <span class="eyebrow">Victoria Buzz &bull; Oct 1, 2026</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQV1dRdi10Q3plZlBwQkJLdVJiQ2tseU9VM3lUQ3h5bjR6dkt4cjl4UUdCbXNEX3N1WHJWbnEycUNaSnFHb19tdlg0NldnNHdsVGhGaFYzRHhlODc2RWVrWmtMMWIzMDY4MmlObWpReURmVzVGNHdyY0tFaGhCOElnM2p1THFDR3ZqbjM3U2c4cVFHQUVVNlNhay04bw?oc=5" target="_blank" rel="noopener">Local election guide: Oak Bay candidates for mayor and council</a></h3>
+            <p>Recent coverage regarding Sam Holland&#x27;s campaign for Oak Bay Mayor in Victoria Buzz.</p>
+            <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQV1dRdi10Q3plZlBwQkJLdVJiQ2tseU9VM3lUQ3h5bjR6dkt4cjl4UUdCbXNEX3N1WHJWbnEycUNaSnFHb19tdlg0NldnNHdsVGhGaFYzRHhlODc2RWVrWmtMMWIzMDY4MmlObWpReURmVzVGNHdyY0tFaGhCOElnM2p1THFDR3ZqbjM3U2c4cVFHQUVVNlNhay04bw?oc=5" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            
+            <span class="eyebrow">Times Colonist &bull; Sep 29, 2026</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxOVzVyeXF5UGlDWHdzYjRDTldwZGs0Vi1sZUJQMUdCVjZJb0VFUkljVmpfbGlqa1FfZmdSd0NWZG56amVSWW0xVHI3RWVIVXZVcFB6QlVrR1l0SE94R2M0aTExTDdId0RTakVtajZlXzZFQWJ5YUd0N2gzQ0FZLXJMaGpRNk9ISzFYSGNoQzBkTktpaFJYdVZuNkthSkhZakRmLVMtQ2hsQlJ4VXhtVXRndU1jNFg4dWQyS29fYWdNdkpQMUE?oc=5" target="_blank" rel="noopener">Three Oak Bay incumbents not running, mayor faces challenge</a></h3>
+            <p>Recent coverage regarding Sam Holland&#x27;s campaign for Oak Bay Mayor in Times Colonist.</p>
+            <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxOVzVyeXF5UGlDWHdzYjRDTldwZGs0Vi1sZUJQMUdCVjZJb0VFUkljVmpfbGlqa1FfZmdSd0NWZG56amVSWW0xVHI3RWVIVXZVcFB6QlVrR1l0SE94R2M0aTExTDdId0RTakVtajZlXzZFQWJ5YUd0N2gzQ0FZLXJMaGpRNk9ISzFYSGNoQzBkTktpaFJYdVZuNkthSkhZakRmLVMtQ2hsQlJ4VXhtVXRndU1jNFg4dWQyS29fYWdNdkpQMUE?oc=5" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://oakbaynews.com/2026/09/17/new-mayoral-candidate-sam-holland-enters-oak-bay-race/" target="_blank" rel="noopener"><img src="https://oakbaynews.com/wp-content/uploads/sites/18/2026/09/260916-obn-sam-holland.jpg?w=1024" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Oak Bay News &bull; Sep 18, 2026</span>
+            <h3><a href="https://oakbaynews.com/2026/09/17/new-mayoral-candidate-sam-holland-enters-oak-bay-race/" target="_blank" rel="noopener">New mayoral candidate Sam Holland enters Oak Bay race</a></h3>
+            <p>The contender says his main priority will be bringing family doctors to Oak Bay</p>
+            <a href="https://oakbaynews.com/2026/09/17/new-mayoral-candidate-sam-holland-enters-oak-bay-race/" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://martlet.ca/oak-bay-faces-critical-issues-as-residents-hit-the-polls-next-month/" target="_blank" rel="noopener"><img src="https://martlet.ca/wp-content/uploads/2026/09/1-e1789415458441-1109x740.png" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Martlet &bull; Sep 14, 2026</span>
+            <h3><a href="https://martlet.ca/oak-bay-faces-critical-issues-as-residents-hit-the-polls-next-month/" target="_blank" rel="noopener">Oak Bay faces critical issues as residents hit the polls next month</a></h3>
+            <p>As the clock ticks towards the October municipal elections, the two candidates face not only the pressure of winning over the district&#x27;s residents, but the pressure of addressing the district&#x27;s many issues as well.</p>
+            <a href="https://martlet.ca/oak-bay-faces-critical-issues-as-residents-hit-the-polls-next-month/" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            
+            <span class="eyebrow">Oak Bay News &bull; Sep 14, 2026</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxQekNlMmxIWnZlOFFhQlNvaFMtcFdkbGtMMS0zLVJoT2FyX0ZLb0c1UVU2TGJvVDZuYXZEM3NYTUQxMEVTR1YyRklUYV9WNnlBMzVqbUd3UTYyUVB0cURMNmFxMnJjVkE4eG1GRkZUeTM2VWNEdzdZM1ZId2JHWDJpYjhKeHdSVE9JaUlqMHVIdw?oc=5" target="_blank" rel="noopener">11 candidates vying for Oak Bay mayor, council seats</a></h3>
+            <p>Recent coverage regarding Sam Holland&#x27;s campaign for Oak Bay Mayor in Oak Bay News.</p>
+            <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxQekNlMmxIWnZlOFFhQlNvaFMtcFdkbGtMMS0zLVJoT2FyX0ZLb0c1UVU2TGJvVDZuYXZEM3NYTUQxMEVTR1YyRklUYV9WNnlBMzVqbUd3UTYyUVB0cURMNmFxMnJjVkE4eG1GRkZUeTM2VWNEdzdZM1ZId2JHWDJpYjhKeHdSVE9JaUlqMHVIdw?oc=5" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            
+            <span class="eyebrow">CHEK News &bull; Sep 14, 2026</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxNZTBZRUdqVDY4MWhObHFDVE1RT2ZLMEZHcG1DcGRHLUNHVjFqb2ZqN3BseXFmaVQtNm96Yjg5WlF5TUNreEh2OUVqS0NMY1EtamxoYUtfOUc5SzNreV9jeVFLdFZOdThrUWYxOFM2Z3A5ZVIwRTI2OUFQelpPRWtyVnBFV0F0QQ?oc=5" target="_blank" rel="noopener">Election 2026: Oak Bay mayor and council candidates</a></h3>
+            <p>Recent coverage regarding Sam Holland&#x27;s campaign for Oak Bay Mayor in CHEK News.</p>
+            <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxNZTBZRUdqVDY4MWhObHFDVE1RT2ZLMEZHcG1DcGRHLUNHVjFqb2ZqN3BseXFmaVQtNm96Yjg5WlF5TUNreEh2OUVqS0NMY1EtamxoYUtfOUc5SzNreV9jeVFLdFZOdThrUWYxOFM2Z3A5ZVIwRTI2OUFQelpPRWtyVnBFV0F0QQ?oc=5" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            
+            <span class="eyebrow">Times Colonist &bull; Sep 1, 2026</span>
+            <h3><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPWV9tMExxakdBeUxTc3k1MVVaSjdqVFdvSWZfbnRoR1FuZ0dqNGhMWFJ4eHRWd2dNNDdWNFoxUEx1RzNMRGZsWTRCTmlZZTZYcGc2dVIwaW1oZmVFeXN6R3pwajJzWHc5SHdtekZVSzNhaVBmajFpYUtwdDFUTS1Pb0FtVzJmTlZwaTBkeDdrbkxiTnhpR2diX3RXSjRHZGJpX190QUxRWnRXYUlxa21TMkNMSDN0cFU?oc=5" target="_blank" rel="noopener">Political newcomers enter mayoral races in Central Saanich, Oak Bay</a></h3>
+            <p>Recent coverage regarding Sam Holland&#x27;s campaign for Oak Bay Mayor in Times Colonist.</p>
+            <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPWV9tMExxakdBeUxTc3k1MVVaSjdqVFdvSWZfbnRoR1FuZ0dqNGhMWFJ4eHRWd2dNNDdWNFoxUEx1RzNMRGZsWTRCTmlZZTZYcGc2dVIwaW1oZmVFeXN6R3pwajJzWHc5SHdtekZVSzNhaVBmajFpYUtwdDFUTS1Pb0FtVzJmTlZwaTBkeDdrbkxiTnhpR2diX3RXSjRHZGJpX190QUxRWnRXYUlxa21TMkNMSDN0cFU?oc=5" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://peninsulanewsreview.com/2026/06/09/better-transit-yyj-pits-grandmothers-on-bikes-against-victorias-rapid-bus/" target="_blank" rel="noopener"><img src="https://peninsulanewsreview.com/wp-content/uploads/sites/16/2026/06/42503151_web1_210630-gng-rapidbus-corridors_1.jpg?w=1024" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Peninsula News Review &bull; Jun 9, 2026</span>
+            <h3><a href="https://peninsulanewsreview.com/2026/06/09/better-transit-yyj-pits-grandmothers-on-bikes-against-victorias-rapid-bus/" target="_blank" rel="noopener">Better Transit YYJ pits grandmothers on bikes against Victoria’s rapid bus</a></h3>
+            <p>Better Transit wants to see Douglas as a corridor primarily designed for pedestrians and transit</p>
+            <a href="https://peninsulanewsreview.com/2026/06/09/better-transit-yyj-pits-grandmothers-on-bikes-against-victorias-rapid-bus/" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://cheknews.ca/bc-transit-12-6m-surplus-locked-in-red-tape-advocate-wants-it-put-to-good-use-1325293/" target="_blank" rel="noopener"><img src="https://cheknews.ca/wp-content/uploads/2025/10/RAW-READ-TRANSIT-TAP-TO-PAY-2025-10-14_12478.jpg" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">CHEK &bull; May 19, 2026</span>
+            <h3><a href="https://cheknews.ca/bc-transit-12-6m-surplus-locked-in-red-tape-advocate-wants-it-put-to-good-use-1325293/" target="_blank" rel="noopener">BC Transit $12.6M surplus locked in red tape, advocate wants it put to good use</a></h3>
+            <p>BC Transit’s long-awaited rollout of contactless payment comes in the shadows of criticism from those who argue the agency should instead be using its surplus funds to address other transit needs.</p>
+            <a href="https://cheknews.ca/bc-transit-12-6m-surplus-locked-in-red-tape-advocate-wants-it-put-to-good-use-1325293/" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://bettercolumbia.ca/2026/04/27/transit-has-not-kept-up-with-growth/" target="_blank" rel="noopener"><img src="https://bettercolumbia.ca/wp-content/uploads/2026/04/Transit-stall.jpg" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Better Columbia &bull; Apr 27, 2026</span>
+            <h3><a href="https://bettercolumbia.ca/2026/04/27/transit-has-not-kept-up-with-growth/" target="_blank" rel="noopener">Why hasn&#x27;t transit in BC kept up with growth?</a></h3>
+            <p>Transit in BC hasn&#x27;t kept up with growth, because every time the province faces a deficit, they go after transit.</p>
+            <a href="https://bettercolumbia.ca/2026/04/27/transit-has-not-kept-up-with-growth/" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://vancouverislandfreedaily.com/2025/12/18/greater-victoria-vacancy-rate-reaches-highest-level-of-21st-century/" target="_blank" rel="noopener"><img src="https://vancouverislandfreedaily.com/wp-content/uploads/sites/17/2025/12/41151691_web1_15854618_web1_20180220-BPD-construction-condo-TF.jpg?w=1024" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Vancouver Island Free Daily &bull; Dec 18, 2025</span>
+            <h3><a href="https://vancouverislandfreedaily.com/2025/12/18/greater-victoria-vacancy-rate-reaches-highest-level-of-21st-century/" target="_blank" rel="noopener">Greater Victoria vacancy rate reaches highest level of 21st century</a></h3>
+            <p>The vacancy rate spike has been attributed to lower immigration and more units being built</p>
+            <a href="https://vancouverislandfreedaily.com/2025/12/18/greater-victoria-vacancy-rate-reaches-highest-level-of-21st-century/" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/joggers-versus-bus-in-downtown-victoria-find-out-who-won-the-race-12416934" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2026/06/web1_vka---bus-race-06122026--0-6.jpg;w=1000;h=667;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/joggers-versus-bus-in-downtown-victoria-find-out-who-won-the-race-12416934" target="_blank" rel="noopener">Joggers versus bus in downtown Victoria: Find out who won the race</a></h3>
+            <p>Transit advocates call for more dedicated bus lanes.</p>
+            <a href="https://www.timescolonist.com/local-news/joggers-versus-bus-in-downtown-victoria-find-out-who-won-the-race-12416934" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/crd-board-pushes-for-free-transit-passes-for-youth-11894328" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2026/02/web1_02192026-vtc-news-crd-youth-pass.jpg;w=1000;h=591;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/crd-board-pushes-for-free-transit-passes-for-youth-11894328" target="_blank" rel="noopener">CRD board pushes for free transit passes for youth</a></h3>
+            <p>The goal is to have the province implement a phased expansion of the fare-free youth transit program, increasing eligibility by one year at a time.</p>
+            <a href="https://www.timescolonist.com/local-news/crd-board-pushes-for-free-transit-passes-for-youth-11894328" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.cbc.ca/news/canada/british-columbia/bc-municipality-european-elevators-1.7561726" target="_blank" rel="noopener"><img src="https://i.cbc.ca/ais/1.3689496,1716405719000/full/max/0/default.jpg?im=Crop%2Crect%3D%280%2C0%2C1000%2C562%29%3BResize%3D620" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">CBC</span>
+            <h3><a href="https://www.cbc.ca/news/canada/british-columbia/bc-municipality-european-elevators-1.7561726" target="_blank" rel="noopener">B.C. municipality pushes for European-style elevators to cut costs, boost accessibility | CBC News</a></h3>
+            <p>A Vancouver Island municipality is pushing the province to make changes to its elevator rules in a bid to make homes more accessible and affordable.</p>
+            <a href="https://www.cbc.ca/news/canada/british-columbia/bc-municipality-european-elevators-1.7561726" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://omny.fm/shows/cfax-1070/free-transit-for-teens-picks-up-speed-at-crd" target="_blank" rel="noopener"><img src="https://omny.fm/shows/cfax-1070/free-transit-for-teens-picks-up-speed-at-crd/image.jpg?t=1771551636&amp;size=wideShare" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">omny.fm</span>
+            <h3><a href="https://omny.fm/shows/cfax-1070/free-transit-for-teens-picks-up-speed-at-crd" target="_blank" rel="noopener">Free Transit for Teens Picks Up Speed at CRD - CFAX 1070</a></h3>
+            <p>The CRD is renewing its push for fare‑free transit for youth, this time proposing a phased rollout as it sends the plan to AVICC and UBCM. Joining us is Sam Holland from Better Transit YYJ to explain why free transit matters, how it can open doors for teens, and what the phased approach means. Plus—what happens next, and how supporters can speak up. IMAGE: A pair of fare validators is shown. via BC Transit</p>
+            <a href="https://omny.fm/shows/cfax-1070/free-transit-for-teens-picks-up-speed-at-crd" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/direct-bus-to-airport-via-route-72-proposed-comes-at-expense-of-peninsula-riders-11503352" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2025/11/web1_vka-transit-01132.jpg;w=1000;h=717;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/direct-bus-to-airport-via-route-72-proposed-comes-at-expense-of-peninsula-riders-11503352" target="_blank" rel="noopener">Direct bus to airport via Route 72 proposed, comes at expense of Peninsula riders</a></h3>
+            <p>The proposed change involves having the existing Route 72 bus Swartz Bay/Downtown serve the airport and ferry terminal on all trips.</p>
+            <a href="https://www.timescolonist.com/local-news/direct-bus-to-airport-via-route-72-proposed-comes-at-expense-of-peninsula-riders-11503352" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/bc-transit-to-introduce-credit-and-debit-card-payment-for-fares-current-umo-users-need-to-re-enter-card-info-11345701" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2025/10/web1_vka-umo-0418504185.jpg;w=1000;h=695;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/bc-transit-to-introduce-credit-and-debit-card-payment-for-fares-current-umo-users-need-to-re-enter-card-info-11345701" target="_blank" rel="noopener">B.C. Transit to introduce credit and debit card payment for fares; current Umo users need to re-enter card info</a></h3>
+            <p>Current Umo users will need to update their credit card information.</p>
+            <a href="https://www.timescolonist.com/local-news/bc-transit-to-introduce-credit-and-debit-card-payment-for-fares-current-umo-users-need-to-re-enter-card-info-11345701" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/mayors-to-work-with-first-nations-on-commuter-rail-that-doesnt-cut-reserve-land-in-half-11613304" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2025/12/web1_vka-corridor-19293.jpg;w=1000;h=720;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/mayors-to-work-with-first-nations-on-commuter-rail-that-doesnt-cut-reserve-land-in-half-11613304" target="_blank" rel="noopener">Mayors to work with First Nations on commuter rail that doesn&#x27;t cut reserve land in half</a></h3>
+            <p>Esquimalt Nation does not want any future passenger rail service to bisect its 19.3-hectare reserve, but no alternate route has been proposed.</p>
+            <a href="https://www.timescolonist.com/local-news/mayors-to-work-with-first-nations-on-commuter-rail-that-doesnt-cut-reserve-land-in-half-11613304" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/soaring-war-related-diesel-costs-put-pressure-on-bc-transit-12023169" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2026/03/web1_vka-transit-20321.jpg;w=1000;h=551;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/soaring-war-related-diesel-costs-put-pressure-on-bc-transit-12023169" target="_blank" rel="noopener">Soaring war-related diesel costs put pressure on B.C. Transit</a></h3>
+            <p>The new Royal Oak transit centre and bus-lane infrastructure have also been delayed as the transit agency reviews spending.</p>
+            <a href="https://www.timescolonist.com/local-news/soaring-war-related-diesel-costs-put-pressure-on-bc-transit-12023169" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/saanich-council-puts-off-decision-on-quadra-mckenzie-plan-to-feb-2-11765199" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2026/01/web1_07192025-vtc-news-qmp-explainer_6.jpg;w=1000;h=563;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/saanich-council-puts-off-decision-on-quadra-mckenzie-plan-to-feb-2-11765199" target="_blank" rel="noopener">Saanich council puts off decision on Quadra-McKenzie plan to Feb. 2</a></h3>
+            <p>After six hours of public input, council questions and staff explanations that wrapped up early Tuesday morning, council voted to postpone to Feb. 2 a vote on what to do with the plan.</p>
+            <a href="https://www.timescolonist.com/local-news/saanich-council-puts-off-decision-on-quadra-mckenzie-plan-to-feb-2-11765199" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/heavy-traffic-not-a-deterrent-as-saanich-fair-brings-out-thousands-7491951" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2023/09/web1_vka-saanich-fair-01065.jpg;w=1000;h=786;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/heavy-traffic-not-a-deterrent-as-saanich-fair-brings-out-thousands-7491951" target="_blank" rel="noopener">Heavy traffic not a deterrent as Saanich Fair brings out thousands</a></h3>
+            <p>The Saanich Fair continues Sunday 9 a.m. to 9 p.m., and Monday 9 a.m. to 6 p.m., at the Saanich Fairgrounds, 1528 Stellys Cross Rd.</p>
+            <a href="https://www.timescolonist.com/local-news/heavy-traffic-not-a-deterrent-as-saanich-fair-brings-out-thousands-7491951" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/local-news/cyclists-beat-motorists-in-commuter-race-to-the-legislature-8718961" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2024/05/web1_capital-bike-commuter-challenge-may-8-2024.-photo-by-jay-wallace--7.jpg;w=1000;h=667;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/local-news/cyclists-beat-motorists-in-commuter-race-to-the-legislature-8718961" target="_blank" rel="noopener">Cyclists beat motorists in commuter race to the legislature</a></h3>
+            <p>Twenty-one pairs of cyclists and motorists raced from Langford, Esquimalt, Oak Bay and Saanich to the legislature, with cyclists winning in 18 competitions.</p>
+            <a href="https://www.timescolonist.com/local-news/cyclists-beat-motorists-in-commuter-race-to-the-legislature-8718961" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <article class="action-card">
+            <a href="https://www.timescolonist.com/islander/our-community-seasonal-bike-valet-100-years-of-the-united-church-10905279" target="_blank" rel="noopener"><img src="https://www.vmcdn.ca/f/files/victoriatimescolonist/json/2025/07/web1_bike-valet-2.-july-2.jpg;w=1000;h=750;mode=crop" alt="" class="hero-image" style="aspect-ratio: 16/9; margin-bottom: 1rem;" loading="lazy"></a>
+            <span class="eyebrow">Times Colonist</span>
+            <h3><a href="https://www.timescolonist.com/islander/our-community-seasonal-bike-valet-100-years-of-the-united-church-10905279" target="_blank" rel="noopener">Our Community: Seasonal bike valet; 100 years of the United Church</a></h3>
+            <p>The bike-valet is run by Capital Bike, a non-profit organization that offers the service at cost to organizers of local events.</p>
+            <a href="https://www.timescolonist.com/islander/our-community-seasonal-bike-valet-100-years-of-the-united-church-10905279" target="_blank" rel="noopener" class="btn btn-bordeaux btn-sm">
+              Read Article <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </article>
+          <!-- NEWS:END -->
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -104,5 +321,6 @@
   </div>
 </footer>
 
+  <script src="nav.js" defer></script>
 </body>
 </html>
